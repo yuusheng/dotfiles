@@ -11,6 +11,8 @@ return {
         "css-lsp",
         "vue-language-server",
         "rust-analyzer",
+        "markdownlint-cli2",
+        "markdown-toc",
       })
     end,
   },
@@ -22,6 +24,7 @@ return {
       ---@type lspconfig.options
       servers = {
         cssls = {},
+        marksman = {},
         tailwindcss = {
           root_dir = function(...)
             return require("lspconfig.util").root_pattern(".git")(...)
