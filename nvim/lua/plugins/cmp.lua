@@ -13,7 +13,6 @@ return {
       table.insert(opts.sources, { name = "emoji" })
 
       local cmp = require("cmp")
-      local luasnip = require("luasnip")
       cmp.setup({
         snippet = {
           -- REQUIRED - you must specify a snippet engine
@@ -21,33 +20,33 @@ return {
             require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
           end,
         },
+        mapping = cmp.mapping.preset.insert({
+          -- Use <C-b/f> to scroll the docs
+          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+          ["<C-f>"] = cmp.mapping.scroll_docs(4),
+          -- Use <C-k/j> to switch in items
+          ["<C-k>"] = cmp.mapping.select_prev_item(),
+          ["<C-j>"] = cmp.mapping.select_next_item(),
+          -- Use <CR>(Enter) to confirm selection
+          -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+          ["<Tab>"] = cmp.mapping.confirm({ select = true }),
 
-        mapping = {
-          ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              local entry = cmp.get_selected_entry()
-              if not entry then
-                cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-              else
-                cmp.confirm()
-              end
+          ["<M-j>"] = cmp.mapping(function(fallback)
+            if not cmp.visible() then
+              cmp.complete()
             else
               fallback()
             end
-          end, { "i", "s", "c" }),
-        },
-      })
-      cmp.setup.cmdline({ "/", "?" }, {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = {
-          { name = "buffer" },
-        },
-      })
-      cmp.setup.cmdline(":", {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = {
-          { name = "cmdline" },
-        },
+          end),
+        }),
+
+        -- Set source precedence
+        sources = cmp.config.sources({
+          { name = "nvim_lsp" }, -- For nvim-lsp
+          { name = "luasnip" }, -- For luasnip user
+          { name = "buffer" }, -- For buffer word completion
+          { name = "path" }, -- For path completion
+        }),
       })
     end,
   },
