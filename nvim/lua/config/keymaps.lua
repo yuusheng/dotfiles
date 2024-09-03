@@ -35,3 +35,6 @@ keymap.set("n", "<C-S-j>", "<C-w>-")
 keymap.set("n", "<C-j>", function()
   vim.diagnostic.goto_next()
 end, opts)
+
+vim.keymap.set("v", "<s-tab>", "<gv", opts)
+vim.keymap.set("v", "<tab>", ">gv", opts)
