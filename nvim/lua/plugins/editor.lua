@@ -31,7 +31,7 @@ return {
         ";r",
         function()
           local builtin = require("telescope.builtin")
-          builtin.live_grep()
+          builtin.live_grep({ search_dirs = { vim.fn.getcwd(), hidden = true } })
         end,
         desc = "Search for a string in your current working directory ane get results live as you type, respects .gitignore",
       },
