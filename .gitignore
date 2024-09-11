@@ -1,0 +1,9 @@
+*
+!nvim
+!nvim/*
+!neovide
+!starship.toml
+!.gitignore
+!zed
+!zed/settings.json
+!zed/keymap.json

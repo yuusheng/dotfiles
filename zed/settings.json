@@ -1,0 +1,44 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `open default settings` command
+// from the command palette or from `Zed` application menu.
+{
+  "theme": "Xcode Default Dark",
+  "vim_mode": true,
+  "relative_line_numbers": true,
+  "cursor_blink": false,
+  "features": {
+    "copilot": false
+  },
+  // "rust-analyzer": {
+  //   "initialization_options": {
+  //     "check": {
+  //       "command": "clippy" // rust-analyzer.check.command (default: "check")
+  //     }
+  //   }
+  // },
+  "autosave": "off",
+  "auto_update": true,
+  "ui_font_size": 16,
+  "buffer_font_size": 16,
+  "terminal": {
+    "font_size": 14,
+    "line_height": {
+      "custom": 1.3
+    },
+    "font_family": "JetBrainsMono Nerd Font Mono"
+  },
+  "buffer_font_family": "Fira Code",
+  "inlay_hints": {
+    "enabled": true,
+    "show_type_hints": true,
+    // "show_parameter_hints": true,
+    // "show_other_hints": false,
+    "edit_debounce_ms": 700,
+    "scroll_debounce_ms": 50
+  }
+}
