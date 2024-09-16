@@ -7,3 +7,5 @@
 !zed
 !zed/settings.json
 !zed/keymap.json
+!wezterm
+!wezterm/*
