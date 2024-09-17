@@ -9,3 +9,5 @@
 !zed/keymap.json
 !wezterm
 !wezterm/*
+!zsh
+!zsh/*
