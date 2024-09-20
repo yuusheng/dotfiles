@@ -11,11 +11,6 @@ local config = {
 	window_decorations = "RESIZE",
 	keys = {
 		{
-			key = "f",
-			mods = "CTRL",
-			action = wezterm.action.ToggleFullScreen,
-		},
-		{
 			key = "k",
 			mods = "SUPER",
 			action = wezterm.action.ClearScrollback("ScrollbackAndViewport"),
