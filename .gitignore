@@ -11,3 +11,5 @@
 !wezterm/*
 !zsh
 !zsh/*
+!tmux
+!tmux/*
