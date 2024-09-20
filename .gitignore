@@ -13,3 +13,5 @@
 !zsh/*
 !tmux
 !tmux/*
+!tmux/**/*
+!start.sh
