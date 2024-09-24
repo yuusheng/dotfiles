@@ -16,3 +16,4 @@
 !tmux/**/*
 tmux/plugins/*
 !start.sh
+.DS_Store

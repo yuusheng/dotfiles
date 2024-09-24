@@ -8,7 +8,7 @@ keymap.set("n", "+", "<C-a>")
 keymap.set("n", "-", "<C-x>")
 
 -- Select all
-keymap.set("n", "<C-a>", "gg<S-v>G")
+keymap.set("n", "<C-a>", "ggVG")
 
 -- Save file and quit
 keymap.set("n", "<Leader>w", ":update<Return>", opts)
@@ -17,9 +17,10 @@ keymap.set("n", "<Leader>Q", ":qa<Return>", opts)
 
 -- Tabs
 keymap.set("n", "te", ":tabedit<Return>", opts)
-keymap.set("n", "<tab>", ":tabnext<Return>", opts)
-keymap.set("n", "<s-tab>", ":tabprev<Return>", opts)
 keymap.set("n", "tw", ":tabclose<Return>", opts)
+
+-- Ctrl-o for move back, Ctrl-i for move forward
+keymap.set("n", "<C-i>", "<tab>", opts)
 
 -- Split window
 keymap.set("n", "ss", ":split<Return>", opts)

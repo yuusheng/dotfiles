@@ -33,10 +33,6 @@ alias grs="git remote set-url origin $1"
 source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.bash_profile
 
-# pnpm
-export PNPM_HOME="~/Library/pnpm"
-export PATH="$PNPM_HOME:$PATH"
-# pnpm end
 # bun completions
 [ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
 
