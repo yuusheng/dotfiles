@@ -19,53 +19,55 @@ return {
       {
         ";f",
         function()
-          local builtin = require("telescope.builtin")
-          builtin.find_files({
-            no_ignore = false,
-            hidden = true,
-          })
+          require("telescope.builtin").find_files()
         end,
         desc = "Lists files in your current working directory, respects .gitignore",
       },
       {
-        ";r",
+        ";g",
         function()
-          local builtin = require("telescope.builtin")
-          builtin.live_grep({ search_dirs = { vim.fn.getcwd(), hidden = true } })
+          require("telescope.builtin").live_grep()
+          -- builtin.live_grep({ search_dirs = { vim.fn.getcwd(), hidden = true } })
         end,
         desc = "Search for a string in your current working directory ane get results live as you type, respects .gitignore",
       },
       {
-        "\\\\",
+        ";b",
         function()
-          local builtin = require("telescope.builtin")
-          builtin.buffers()
+          require("telescope.builtin").buffers()
         end,
         desc = "Lists open buffers",
       },
       {
         ";;",
         function()
-          local builtin = require("telescope.builtin")
-          builtin.resume()
+          require("telescope.builtin").resume()
         end,
         desc = "Resume the previous telescope picker",
       },
       {
-        ";e",
+        ";d",
         function()
-          local builtin = require("telescope.builtin")
-          builtin.diagnostics()
+          require("telescope.builtin").diagnostics()
         end,
         desc = "Lists Diagnostics for all open buffers or a specific buffer",
       },
       {
         ";s",
         function()
-          local builtin = require("telescope.builtin")
-          builtin.treesitter()
+          require("telescope.builtin").treesitter()
         end,
         desc = "Lists Function names, variables, from Treesitter",
+      },
+      {
+        "ff",
+        function()
+          require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+            winblend = 10,
+            -- previewer = false,
+          }))
+        end,
+        desc = "Find content in current buffer",
       },
       {
         "sf",

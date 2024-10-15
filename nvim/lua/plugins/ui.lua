@@ -98,10 +98,10 @@ return {
       "nvim-lua/plenary.nvim",
     },
   },
-  -- {
-  --   "RRethy/vim-illuminate",
-  --   config = function()
-  --     require("illuminate").configure({})
-  --   end,
-  -- },
+  {
+    "RRethy/vim-illuminate",
+    config = function()
+      require("illuminate").configure({})
+    end,
+  },
 }
