@@ -37,5 +37,7 @@ keymap.set("n", "<C-j>", function()
   vim.diagnostic.goto_next()
 end, opts)
 
+vim.keymap.set("n", "<C-b>", "<cmd>Neotree toggle<cr>", opts)
 vim.keymap.set("v", "<s-tab>", "<gv", opts)
 vim.keymap.set("v", "<tab>", ">gv", opts)
+vim.keymap.set("n", "<A-Tab>", "<cmd>bNext<CR>")
