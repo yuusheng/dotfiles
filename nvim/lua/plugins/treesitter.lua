@@ -1,7 +1,9 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    tag = "v0.9.1",
+    dependencies = {
+      "nvim-treesitter/playground",
+    },
     opts = {
       ensure_installed = {
         "javascript",

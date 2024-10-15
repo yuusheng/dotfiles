@@ -289,4 +289,8 @@ return {
       end
     end,
   },
+  {
+    "ethanholz/nvim-lastplace",
+    config = true,
+  },
 }
