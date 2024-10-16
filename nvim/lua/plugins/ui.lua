@@ -96,7 +96,11 @@ return {
     -- optional for floating window border decoration
     dependencies = {
       "nvim-lua/plenary.nvim",
+      "akinsho/git-conflict.nvim",
     },
+    config = function()
+      require("git-conflict").setup()
+    end,
   },
   {
     "RRethy/vim-illuminate",
