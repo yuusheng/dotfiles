@@ -6,147 +6,6 @@ return {
     opts = {},
   },
   {
-    "nvim-telescope/telescope.nvim",
-    priority = 1000,
-    dependencies = {
-      {
-        "nvim-telescope/telescope-fzf-native.nvim",
-        build = "make",
-      },
-      "nvim-telescope/telescope-file-browser.nvim",
-    },
-    keys = {
-      {
-        ";f",
-        function()
-          require("telescope.builtin").find_files()
-        end,
-        desc = "Lists files in your current working directory, respects .gitignore",
-      },
-      {
-        ";g",
-        function()
-          require("telescope.builtin").live_grep()
-          -- builtin.live_grep({ search_dirs = { vim.fn.getcwd(), hidden = true } })
-        end,
-        desc = "Search for a string in your current working directory ane get results live as you type, respects .gitignore",
-      },
-      {
-        ";b",
-        function()
-          require("telescope.builtin").buffers()
-        end,
-        desc = "Lists open buffers",
-      },
-      {
-        ";;",
-        function()
-          require("telescope.builtin").resume()
-        end,
-        desc = "Resume the previous telescope picker",
-      },
-      {
-        ";d",
-        function()
-          require("telescope.builtin").diagnostics()
-        end,
-        desc = "Lists Diagnostics for all open buffers or a specific buffer",
-      },
-      {
-        ";s",
-        function()
-          require("telescope.builtin").treesitter()
-        end,
-        desc = "Lists Function names, variables, from Treesitter",
-      },
-      {
-        "ff",
-        function()
-          require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-            winblend = 10,
-            -- previewer = false,
-          }))
-        end,
-        desc = "Find content in current buffer",
-      },
-      {
-        "sf",
-        function()
-          local telescope = require("telescope")
-
-          local function telescope_buffer_dir()
-            return vim.fn.expand("%:p:h")
-          end
-
-          telescope.extensions.file_browser.file_browser({
-            path = "%:p:h",
-            cwd = telescope_buffer_dir(),
-            respect_gitignore = false,
-            hidden = true,
-            grouped = true,
-            previewer = false,
-            initial_mode = "normal",
-            layout_config = { height = 40 },
-          })
-        end,
-        desc = "Open File Browser with the path of the current buffer",
-      },
-    },
-    config = function(_, opts)
-      local telescope = require("telescope")
-      local actions = require("telescope.actions")
-      local fb_actions = require("telescope").extensions.file_browser.actions
-
-      opts.defaults = vim.tbl_deep_extend("force", opts.defaults, {
-        wrap_results = true,
-        layout_strategy = "horizontal",
-        layout_config = { prompt_position = "top" },
-        sorting_strategy = "ascending",
-        winblend = 0,
-        mappings = {
-          n = {},
-        },
-      })
-      opts.pickers = {
-        diagnostics = {
-          theme = "ivy",
-          initial_mode = "normal",
-          layout_config = {
-            preview_cutoff = 9999,
-          },
-        },
-      }
-      opts.extensions = {
-        file_browser = {
-          theme = "dropdown",
-          -- disables netrw and use telescope-file-browser in its place
-          hijack_netrw = true,
-          mappings = {
-            -- your custom insert mode mappings
-            ["n"] = {
-              -- your custom normal mode mappings
-              ["N"] = fb_actions.create,
-              ["h"] = fb_actions.goto_parent_dir,
-              ["<C-u>"] = function(prompt_bufnr)
-                for i = 1, 10 do
-                  actions.move_selection_previous(prompt_bufnr)
-                end
-              end,
-              ["<C-d>"] = function(prompt_bufnr)
-                for i = 1, 10 do
-                  actions.move_selection_next(prompt_bufnr)
-                end
-              end,
-            },
-          },
-        },
-      }
-      telescope.setup(opts)
-      require("telescope").load_extension("fzf")
-      require("telescope").load_extension("file_browser")
-    end,
-  },
-  {
     "echasnovski/mini.files",
     opts = {
       windows = {
@@ -155,8 +14,8 @@ return {
         width_preview = 30,
       },
       options = {
-        -- Whether to use for editing directories
-        -- Disabled by default in LazyVim because neo-tree is used for that
+        -- whether to use for editing directories
+        -- disabled by default in lazyvim because neo-tree is used for that
         use_as_default_explorer = false,
       },
     },
@@ -166,14 +25,14 @@ return {
         function()
           require("mini.files").open(vim.api.nvim_buf_get_name(0), true)
         end,
-        desc = "Open mini.files (Directory of Current File)",
+        desc = "open mini.files (directory of current file)",
       },
       {
-        "<leader>fM",
+        "<leader>fm",
         function()
           require("mini.files").open(vim.uv.cwd(), true)
         end,
-        desc = "Open mini.files (cwd)",
+        desc = "open mini.files (cwd)",
       },
     },
     config = function(_, opts)
@@ -208,7 +67,7 @@ return {
           end
         end
 
-        local desc = "Open in " .. direction .. " split"
+        local desc = "open in " .. direction .. " split"
         if close_on_file then
           desc = desc .. " and close"
         end
@@ -216,15 +75,15 @@ return {
       end
 
       local files_set_cwd = function()
-        local cur_entry_path = MiniFiles.get_fs_entry().path
+        local cur_entry_path = minifiles.get_fs_entry().path
         local cur_directory = vim.fs.dirname(cur_entry_path)
         if cur_directory ~= nil then
           vim.fn.chdir(cur_directory)
         end
       end
 
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "MiniFilesBufferCreate",
+      vim.api.nvim_create_autocmd("user", {
+        pattern = "minifilesbuffercreate",
         callback = function(args)
           local buf_id = args.data.buf_id
 
@@ -232,27 +91,27 @@ return {
             "n",
             opts.mappings and opts.mappings.toggle_hidden or "g.",
             toggle_dotfiles,
-            { buffer = buf_id, desc = "Toggle hidden files" }
+            { buffer = buf_id, desc = "toggle hidden files" }
           )
 
           vim.keymap.set(
             "n",
             opts.mappings and opts.mappings.change_cwd or "gc",
             files_set_cwd,
-            { buffer = args.data.buf_id, desc = "Set cwd" }
+            { buffer = args.data.buf_id, desc = "set cwd" }
           )
 
-          map_split(buf_id, opts.mappings and opts.mappings.go_in_horizontal or "<C-w>s", "horizontal", false)
-          map_split(buf_id, opts.mappings and opts.mappings.go_in_vertical or "<C-w>v", "vertical", false)
-          map_split(buf_id, opts.mappings and opts.mappings.go_in_horizontal_plus or "<C-w>S", "horizontal", true)
-          map_split(buf_id, opts.mappings and opts.mappings.go_in_vertical_plus or "<C-w>V", "vertical", true)
+          map_split(buf_id, opts.mappings and opts.mappings.go_in_horizontal or "<c-w>s", "horizontal", false)
+          map_split(buf_id, opts.mappings and opts.mappings.go_in_vertical or "<c-w>v", "vertical", false)
+          map_split(buf_id, opts.mappings and opts.mappings.go_in_horizontal_plus or "<c-w>s", "horizontal", true)
+          map_split(buf_id, opts.mappings and opts.mappings.go_in_vertical_plus or "<c-w>v", "vertical", true)
         end,
       })
 
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "MiniFilesActionRename",
+      vim.api.nvim_create_autocmd("user", {
+        pattern = "minifilesactionrename",
         callback = function(event)
-          LazyVim.lsp.on_rename(event.data.from, event.data.to)
+          lazyvim.lsp.on_rename(event.data.from, event.data.to)
         end,
       })
     end,
@@ -264,7 +123,7 @@ return {
         add = "gsa",
         delete = "gsd",
         find = "gsf",
-        find_left = "gsF",
+        find_left = "gsf",
         highlight = "gsh",
         replace = "gsr",
         update_n_lines = "gsn",
@@ -273,13 +132,13 @@ return {
   },
   {
     "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    cmd = { "markdownpreviewtoggle", "markdownpreview", "markdownpreviewstop" },
     ft = { "markdown" },
     build = function(plugin)
       if vim.fn.executable("npx") then
         vim.cmd("!cd " .. plugin.dir .. " && cd app && npx --yes yarn install")
       else
-        vim.cmd([[Lazy load markdown-preview.nvim]])
+        vim.cmd([[lazy load markdown-preview.nvim]])
         vim.fn["mkdp#util#install"]()
       end
     end,
