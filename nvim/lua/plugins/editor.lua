@@ -139,7 +139,7 @@ return {
   },
   {
     "iamcco/markdown-preview.nvim",
-    cmd = { "markdownpreviewtoggle", "markdownpreview", "markdownpreviewstop" },
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     ft = { "markdown" },
     build = function(plugin)
       if vim.fn.executable("npx") then
@@ -158,5 +158,20 @@ return {
   {
     "ethanholz/nvim-lastplace",
     config = true,
+  },
+  {
+    "windwp/nvim-ts-autotag",
+    opts = {
+      opts = {
+        enable_close_on_slash = true,
+      },
+    },
+  },
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    opts = {
+      enable_check_bracket_line = true,
+    },
   },
 }
