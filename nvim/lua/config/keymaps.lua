@@ -23,8 +23,8 @@ keymap.set("n", "tw", ":tabclose<Return>", opts)
 keymap.set("n", "<C-i>", "<tab>", opts)
 
 -- Split window
-keymap.set("n", "ss", ":split<Return>", opts)
-keymap.set("n", "sv", ":vsplit<Return>", opts)
+keymap.set("n", "<Leader>ss", ":split<Return>", opts)
+keymap.set("n", "<Leader>sv", ":vsplit<Return>", opts)
 
 -- Resize window
 keymap.set("n", "<C-S-h>", "<C-w><")
