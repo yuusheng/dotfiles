@@ -11,7 +11,10 @@ return {
     },
     opts = function(_, opts)
       table.insert(opts.sources, { name = "emoji" })
-
+      table.insert(opts.sources, {
+        name = "lazydev",
+        group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+      })
       local cmp = require("cmp")
       cmp.setup({
         snippet = {
