@@ -30,8 +30,6 @@ return {
           -- Use <C-k/j> to switch in items
           ["<C-k>"] = cmp.mapping.select_prev_item(),
           ["<C-j>"] = cmp.mapping.select_next_item(),
-          -- Use <CR>(Enter) to confirm selection
-          -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
           ["<Tab>"] = cmp.mapping.confirm({ select = true }),
 
           ["<M-j>"] = cmp.mapping(function(fallback)
@@ -49,6 +47,21 @@ return {
           { name = "luasnip" }, -- For luasnip user
           { name = "buffer" }, -- For buffer word completion
           { name = "path" }, -- For path completion
+        }),
+      })
+
+      cmp.setup.cmdline("/", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = "buffer" },
+        },
+      })
+
+      cmp.setup.cmdline(":", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = "path" },
+          { name = "cmdline" },
         }),
       })
     end,

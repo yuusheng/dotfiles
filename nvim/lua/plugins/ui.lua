@@ -85,6 +85,7 @@ return {
   -- LazyGit integration with Telescope
   {
     "kdheepak/lazygit.nvim",
+    event = "VeryLazy",
     keys = {
       {
         ";c",
@@ -104,6 +105,7 @@ return {
   },
   {
     "RRethy/vim-illuminate",
+    event = "VeryLazy",
     config = function()
       require("illuminate").configure({})
     end,

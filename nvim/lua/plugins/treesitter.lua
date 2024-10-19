@@ -4,6 +4,7 @@ return {
     dependencies = {
       "nvim-treesitter/playground",
     },
+    event = "VeryLazy",
     opts = {
       ensure_installed = {
         "javascript",

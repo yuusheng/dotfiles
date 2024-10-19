@@ -13,6 +13,7 @@ return {
   -- amongst your other plugins
   {
     "akinsho/toggleterm.nvim",
+    event = "VeryLazy",
     version = "*",
     config = true,
   },

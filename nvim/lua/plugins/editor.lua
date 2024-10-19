@@ -7,6 +7,7 @@ return {
   },
   {
     "rhysd/accelerated-jk",
+    event = "VeryLazy",
     keys = {
       { "j", "<Plug>(accelerated_jk_gj)" },
       { "k", "<Plug>(accelerated_jk_gk)" },
@@ -14,6 +15,7 @@ return {
   },
   {
     "echasnovski/mini.files",
+    event = "VeryLazy",
     opts = {
       windows = {
         preview = true,
@@ -125,6 +127,7 @@ return {
   },
   {
     "echasnovski/mini.surround",
+    event = "VeryLazy",
     opts = {
       mappings = {
         add = "gsa",
@@ -139,6 +142,7 @@ return {
   },
   {
     "iamcco/markdown-preview.nvim",
+    event = "VeryLazy",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     ft = { "markdown" },
     build = function(plugin)
@@ -161,6 +165,7 @@ return {
   },
   {
     "windwp/nvim-ts-autotag",
+    event = "VeryLazy",
     opts = {
       opts = {
         enable_close_on_slash = true,
