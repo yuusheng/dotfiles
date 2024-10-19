@@ -33,7 +33,7 @@ keymap.set("n", "<C-S-k>", "<C-w>+")
 keymap.set("n", "<C-S-j>", "<C-w>-")
 
 -- Diagnostics
-keymap.set("n", "<C-j>", function()
+keymap.set("n", "<M-d>", function()
   vim.diagnostic.goto_next()
 end, opts)
 

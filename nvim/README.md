@@ -1,7 +1,8 @@
 Current problem:
 
 - [ ] telescope is not easy to use
-  - [ ] how to search in folder?
-  - [ ] how to search globally?
+  - [x] how to search in folder?
+  - [x] how to search globally?
 - [ ] ESLint
 - [ ] terminal
+- [ ] DAP
