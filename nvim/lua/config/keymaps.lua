@@ -15,10 +15,6 @@ keymap.set("n", "<Leader>w", ":update<Return>", opts)
 keymap.set("n", "<Leader>q", ":quit<Return>", opts)
 keymap.set("n", "<Leader>Q", ":qa<Return>", opts)
 
--- Tabs
-keymap.set("n", "te", ":tabedit<Return>", opts)
-keymap.set("n", "tw", ":tabclose<Return>", opts)
-
 -- Ctrl-o for move back, Ctrl-i for move forward
 keymap.set("n", "<C-i>", "<tab>", opts)
 
@@ -37,7 +33,8 @@ keymap.set("n", "<M-d>", function()
   vim.diagnostic.goto_next()
 end, opts)
 
-keymap.set("n", "<C-b>", "<cmd>Neotree toggle<cr>", opts)
 keymap.set("v", "<s-tab>", "<gv", opts)
 keymap.set("v", "<tab>", ">gv", opts)
-keymap.set("n", "<A-Tab>", "<cmd>bNext<CR>")
+keymap.set("n", "<M-Tab>", "<cmd>bNext<CR>")
+
+keymap.set("n", "ZZ", "<cmd>qa<CR>", opts)
