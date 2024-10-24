@@ -1,14 +1,15 @@
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
-keymap.set("n", "x", '"_x')
+keymap.set("n", "x", '"_x', opts)
+keymap.set("n", "c", '"_c', opts)
 
 -- Increment/decrement
-keymap.set("n", "+", "<C-a>")
-keymap.set("n", "-", "<C-x>")
+keymap.set("n", "+", "<C-a>", opts)
+keymap.set("n", "-", "<C-x>", opts)
 
 -- Select all
-keymap.set("n", "<C-a>", "ggVG")
+keymap.set("n", "<C-a>", "ggVG", opts)
 
 -- Save file and quit
 keymap.set("n", "<Leader>w", ":update<Return>", opts)
