@@ -43,7 +43,13 @@ return {
       opts.presets.lsp_doc_border = true
     end,
   },
-
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts = {
+      preset = "helix",
+    },
+  },
   {
     "rcarriga/nvim-notify",
     opts = {
