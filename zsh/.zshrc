@@ -1,6 +1,5 @@
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 source ~/.oh-my-zsh/oh-my-zsh.sh
-eval "$(starship init zsh)"
 
 alias zshconfig="open ~/.zshrc"
 alias szsh="source ~/.zshrc"
@@ -109,3 +108,4 @@ export CPPFLAGS="-I/opt/homebrew/opt/postgresql@15/include"
 export PKG_CONFIG_PATH="/opt/homebrew/opt/postgresql@15/lib/pkgconfig"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+eval "$(starship init zsh)"
