@@ -126,21 +126,6 @@ return {
     end,
   },
   {
-    "echasnovski/mini.surround",
-    event = "VeryLazy",
-    opts = {
-      mappings = {
-        add = "gsa",
-        delete = "gsd",
-        find = "gsf",
-        find_left = "gsf",
-        highlight = "gsh",
-        replace = "gsr",
-        update_n_lines = "gsn",
-      },
-    },
-  },
-  {
     "iamcco/markdown-preview.nvim",
     event = "VeryLazy",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },

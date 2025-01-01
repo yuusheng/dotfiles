@@ -32,6 +32,7 @@
   "mini.surround": { "branch": "main", "commit": "aa5e245829dd12d8ff0c96ef11da28681d6049aa" },
   "neo-tree.nvim": { "branch": "main", "commit": "2a0b2c5d394a280cee9444c9894582ac53098604" },
   "neoconf.nvim": { "branch": "main", "commit": "a66da62912af38b83a42b3e4268974539d09fbdf" },
+  "neogen": { "branch": "main", "commit": "dd0301bfba1f83a3bc009b5430fce7aa3cee6941" },
   "noice.nvim": { "branch": "main", "commit": "eaed6cc9c06aa2013b5255349e4f26a6b17ab70f" },
   "nui.nvim": { "branch": "main", "commit": "53e907ffe5eedebdca1cd503b00aa8692068ca46" },
   "nvim-autopairs": { "branch": "master", "commit": "b464658e9b880f463b9f7e6ccddd93fb0013f559" },

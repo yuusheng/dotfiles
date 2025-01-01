@@ -29,11 +29,6 @@ keymap.set("n", "<C-S-l>", "<C-w>>")
 keymap.set("n", "<C-S-k>", "<C-w>+")
 keymap.set("n", "<C-S-j>", "<C-w>-")
 
--- Diagnostics
-keymap.set("n", "<M-d>", function()
-  vim.diagnostic.goto_next()
-end, opts)
-
 keymap.set("v", "<s-tab>", "<gv", opts)
 keymap.set("v", "<tab>", ">gv", opts)
 keymap.set("n", "<M-Tab>", "<cmd>bNext<CR>")

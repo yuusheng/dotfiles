@@ -84,7 +84,10 @@ return {
           },
         },
         html = {},
-        eslint = {},
+        eslint = {
+          workingDirectories = { mode = "auto" },
+          format = auto_format,
+        },
         lua_ls = {
           -- enabled = false,
           single_file_support = true,
@@ -153,6 +156,10 @@ return {
       },
       setup = {
         eslint = function()
+          if not auto_format then
+            return
+          end
+
           local function get_client(buf)
             return LazyVim.lsp.get_clients({ name = "eslint", bufnr = buf })[1]
           end
