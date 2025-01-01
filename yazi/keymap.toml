@@ -266,6 +266,11 @@ on = "l"
 run = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
 
+[[manager.prepend_keymap]]
+on = "<C-p>"
+run = "quit"
+desc = "Quit yazi in nvim"
+
 [tasks]
 
 keymap = [
