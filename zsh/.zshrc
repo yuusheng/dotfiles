@@ -1,9 +1,6 @@
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 source ~/.oh-my-zsh/oh-my-zsh.sh
 
-alias zshconfig="open ~/.zshrc"
-alias szsh="source ~/.zshrc"
-
 # node script alias
 # dev alias
 alias s="nr start"
@@ -39,25 +36,6 @@ source ~/.bash_profile
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-# dev alias
-alias bs="bun run start"
-alias bd="bun run dev"
-alias bb="bun run build"
-alias bpre="bun run preview"
-alias bbw="bun run build --watch"
-alias bt="bun run test"
-alias btu="bun run test -u"
-alias btw="bun run test --watch"
-alias bserve="bun run serve"
-alias bprd="bun run prd"
-alias blint="bun run lint"
-alias blf="bun run lint --fix"
-alias bplay="bun run play"
-
-# publish alias
-alias bre="bun run release"
-alias bp="bun run publish"
-
 # nginx alias
 alias ngsr="nginx -s reload"
 alias ngss="nginx -s stop"
@@ -86,14 +64,13 @@ proxy_on() {
     export https_proxy=http://127.0.0.1:7890
     export http_proxy=http://127.0.0.1:7890
     export all_proxy=socks5://127.0.0.1:7890
-    echo -e "终端代理已开启。"
+    echo -e "Open Proxy Success"
 }
 
 proxy_off(){
     unset http_proxy https_proxy
-    echo -e "终端代理已关闭。"
+    echo -e "Close Proxy"
 }
-
 
 # rustup
 export RUSTUP_DIST_SERVER="https://rsproxy.cn"
