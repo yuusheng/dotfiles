@@ -86,3 +86,8 @@ export PKG_CONFIG_PATH="/opt/homebrew/opt/postgresql@15/lib/pkgconfig"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(starship init zsh)"
+
+# yazi default open application
+export EDITOR=nvim
+alias vim="nvim"
+
