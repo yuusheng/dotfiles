@@ -1,7 +1,3 @@
-if true then
-  return {}
-end
-
 return {
   {
     "yetone/avante.nvim",
@@ -9,13 +5,18 @@ return {
     lazy = false,
     version = false, -- set this if you want to always pull the latest change
     opts = {
-      -- add any opts here
-      setup = function()
-        require("avante_lib").load()
-      end,
+      provider = "ollama", -- You can then change this provider here
+      vendors = {
+        ollama = {
+          __inherited_from = "openai",
+          api_key_name = "",
+          endpoint = "http://127.0.0.1:11434/v1",
+          model = "llama3.2",
+        },
+      },
     },
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-    build = "make BUILD_FROM_SOURCE=true",
+    build = "make",
     -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
     dependencies = {
       "stevearc/dressing.nvim",
