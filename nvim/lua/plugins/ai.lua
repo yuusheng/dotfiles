@@ -1,5 +1,5 @@
 -- prefil edit window with common scenarios to avoid repeating query and submit immediately
-local function prefill_edit_window(request)
+local prefill_edit_window = function(request)
   require("avante.api").edit()
   local code_bufnr = vim.api.nvim_get_current_buf()
   local code_winid = vim.api.nvim_get_current_win()
@@ -15,7 +15,7 @@ end
 
 ---Get env with default value
 ---@return string
-local function get_env_with_default(env_key, default_value)
+local get_env_with_default = function(env_key, default_value)
   local env_value = os.getenv(env_key)
   if env_value then
     return env_value
@@ -202,13 +202,20 @@ return {
       local ollama_host = get_env_with_default("OLLAMA_HOST", "http://localhost:11434/v1")
       local model_name = get_env_with_default("AVANTE_MODEL", "deepseek-coder:6.7b")
       return {
-        provider = "ollama", -- You can then change this provider here
-        vendors = {
-          ollama = {
-            __inherited_from = "openai",
-            api_key_name = "",
-            endpoint = ollama_host,
-            model = model_name,
+        provider = "copilot",
+        auto_suggestions_provider = "copilot",
+        behaviour = {
+          auto_suggestions = true, -- Experimental stage
+          auto_apply_diff_after_generation = true,
+          support_paste_from_clipboard = true,
+        },
+        mappings = {
+          --- @class AvanteConflictMappings
+          suggestion = {
+            accept = "<Tab>",
+            next = "<M-]>",
+            prev = "<M-[>",
+            dismiss = "<C-]>",
           },
         },
       }
@@ -249,12 +256,5 @@ return {
         ft = { "markdown", "Avante" },
       },
     },
-  },
-
-  {
-    "github/copilot.vim",
-    config = function()
-      require("copilot").setup({})
-    end,
   },
 }

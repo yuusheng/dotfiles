@@ -11,6 +11,7 @@ return {
         "css-lsp",
         "vue-language-server",
         "rust-analyzer",
+        "vtsls",
         "markdownlint-cli2",
         "markdown-toc",
       })
@@ -52,6 +53,11 @@ return {
               hybridMode = true,
             },
           },
+          settings = {
+            vue = {
+              updateImportsOnFileMove = { enabled = true },
+            },
+          },
         },
         tsserver = {
           root_dir = function(...)
@@ -83,10 +89,21 @@ return {
             },
           },
         },
+        vtsls = {},
         html = {},
         eslint = {
-          workingDirectories = { mode = "auto" },
-          format = auto_format,
+          on_attach = function()
+            local key_maps = require("lazyvim.plugins.lsp.keymaps").get()
+
+            table.insert(key_maps, {
+              "<Leader>lF",
+              function()
+                vim.cmd.EslintFixAll()
+              end,
+              desc = "Format buffer",
+              mode = { "n" },
+            })
+          end,
         },
         lua_ls = {
           -- enabled = false,
@@ -153,45 +170,6 @@ return {
             },
           },
         },
-      },
-      setup = {
-        eslint = function()
-          if not auto_format then
-            return
-          end
-
-          local function get_client(buf)
-            return LazyVim.lsp.get_clients({ name = "eslint", bufnr = buf })[1]
-          end
-
-          local formatter = LazyVim.lsp.formatter({
-            name = "eslint: lsp",
-            primary = false,
-            priority = 200,
-            filter = "eslint",
-          })
-
-          -- Use EslintFixAll on Neovim < 0.10.0
-          if not pcall(require, "vim.lsp._dynamic") then
-            formatter.name = "eslint: EslintFixAll"
-            formatter.sources = function(buf)
-              local client = get_client(buf)
-              return client and { "eslint" } or {}
-            end
-            formatter.format = function(buf)
-              local client = get_client(buf)
-              if client then
-                local diag = vim.diagnostic.get(buf, { namespace = vim.lsp.diagnostic.get_namespace(client.id) })
-                if #diag > 0 then
-                  vim.cmd("EslintFixAll")
-                end
-              end
-            end
-          end
-
-          -- register the formatter with LazyVim
-          LazyVim.format.register(formatter)
-        end,
       },
     },
   },

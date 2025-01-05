@@ -35,4 +35,11 @@ return {
     },
   },
   { "akinsho/git-conflict.nvim", version = "*", config = true },
+  {
+    "f-person/git-blame.nvim",
+    opts = {
+      date_format = "%r",
+      message_template = "  <author> 󰔠 <date> 󰈚 <summary>  <sha>",
+    },
+  },
 }
