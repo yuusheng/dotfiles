@@ -17,7 +17,6 @@ end
 ---@return string
 local function get_env_with_default(env_key, default_value)
   local env_value = os.getenv(env_key)
-  vim.print(env_value)
   if env_value then
     return env_value
   else
@@ -202,7 +201,6 @@ return {
 
       local ollama_host = get_env_with_default("OLLAMA_HOST", "http://localhost:11434/v1")
       local model_name = get_env_with_default("AVANTE_MODEL", "deepseek-coder:6.7b")
-      vim.print("ollama_host", ollama_host)
       return {
         provider = "ollama", -- You can then change this provider here
         vendors = {

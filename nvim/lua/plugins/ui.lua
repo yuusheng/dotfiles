@@ -88,27 +88,6 @@ return {
       })
     end,
   },
-  -- LazyGit integration with Telescope
-  {
-    "kdheepak/lazygit.nvim",
-    event = "VeryLazy",
-    keys = {
-      {
-        ";c",
-        ":LazyGit<Return>",
-        silent = true,
-        noremap = true,
-      },
-    },
-    -- optional for floating window border decoration
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "akinsho/git-conflict.nvim",
-    },
-    config = function()
-      require("git-conflict").setup()
-    end,
-  },
   {
     "RRethy/vim-illuminate",
     event = "VeryLazy",
