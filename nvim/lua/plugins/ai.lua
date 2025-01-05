@@ -41,163 +41,165 @@ local avante_add_docstring = "Add docstring to the following codes"
 local avante_fix_bugs = "Fix the bugs inside the following codes if any"
 local avante_add_tests = "Implement tests for the following code"
 
-require("which-key").add({
-  { "<leader>a", group = "Avante" }, -- NOTE: add for avante.nvim
-  {
-    mode = { "n", "v" },
-    {
-      "<leader>ag",
-      function()
-        require("avante.api").ask({ question = avante_grammar_correction })
-      end,
-      desc = "Grammar Correction(ask)",
-    },
-    {
-      "<leader>ak",
-      function()
-        require("avante.api").ask({ question = avante_keywords })
-      end,
-      desc = "Keywords(ask)",
-    },
-    {
-      "<leader>al",
-      function()
-        require("avante.api").ask({ question = avante_code_readability_analysis })
-      end,
-      desc = "Code Readability Analysis(ask)",
-    },
-    {
-      "<leader>ao",
-      function()
-        require("avante.api").ask({ question = avante_optimize_code })
-      end,
-      desc = "Optimize Code(ask)",
-    },
-    {
-      "<leader>am",
-      function()
-        require("avante.api").ask({ question = avante_summarize })
-      end,
-      desc = "Summarize text(ask)",
-    },
-    {
-      "<leader>an",
-      function()
-        require("avante.api").ask({ question = avante_translate })
-      end,
-      desc = "Translate text(ask)",
-    },
-    {
-      "<leader>ax",
-      function()
-        require("avante.api").ask({ question = avante_explain_code })
-      end,
-      desc = "Explain Code(ask)",
-    },
-    {
-      "<leader>ac",
-      function()
-        require("avante.api").ask({ question = avante_complete_code })
-      end,
-      desc = "Complete Code(ask)",
-    },
-    {
-      "<leader>ad",
-      function()
-        require("avante.api").ask({ question = avante_add_docstring })
-      end,
-      desc = "Docstring(ask)",
-    },
-    {
-      "<leader>ab",
-      function()
-        require("avante.api").ask({ question = avante_fix_bugs })
-      end,
-      desc = "Fix Bugs(ask)",
-    },
-    {
-      "<leader>au",
-      function()
-        require("avante.api").ask({ question = avante_add_tests })
-      end,
-      desc = "Add Tests(ask)",
-    },
-  },
-})
-
-require("which-key").add({
-  { "<leader>a", group = "Avante" }, -- NOTE: add for avante.nvim
-  {
-    mode = { "v" },
-    {
-      "<leader>aG",
-      function()
-        prefill_edit_window(avante_grammar_correction)
-      end,
-      desc = "Grammar Correction",
-    },
-    {
-      "<leader>aK",
-      function()
-        prefill_edit_window(avante_keywords)
-      end,
-      desc = "Keywords",
-    },
-    {
-      "<leader>aO",
-      function()
-        prefill_edit_window(avante_optimize_code)
-      end,
-      desc = "Optimize Code(edit)",
-    },
-    {
-      "<leader>aC",
-      function()
-        prefill_edit_window(avante_complete_code)
-      end,
-      desc = "Complete Code(edit)",
-    },
-    {
-      "<leader>aD",
-      function()
-        prefill_edit_window(avante_add_docstring)
-      end,
-      desc = "Docstring(edit)",
-    },
-    {
-      "<leader>aB",
-      function()
-        prefill_edit_window(avante_fix_bugs)
-      end,
-      desc = "Fix Bugs(edit)",
-    },
-    {
-      "<leader>aU",
-      function()
-        prefill_edit_window(avante_add_tests)
-      end,
-      desc = "Add Tests(edit)",
-    },
-  },
-})
-
 return {
   {
     "yetone/avante.nvim",
     event = "VeryLazy",
     lazy = false,
     version = false, -- set this if you want to always pull the latest change
-    opts = {
-      provider = "ollama", -- You can then change this provider here
-      vendors = {
-        ollama = {
-          __inherited_from = "openai",
-          api_key_name = "",
-          endpoint = "http://127.0.0.1:11434/v1",
-          model = "codellama",
+    opts = function()
+      require("which-key").add({
+        { "<leader>a", group = "Avante" }, -- NOTE: add for avante.nvim
+        {
+          mode = { "n", "v" },
+          {
+            "<leader>ag",
+            function()
+              require("avante.api").ask({ question = avante_grammar_correction })
+            end,
+            desc = "Grammar Correction(ask)",
+          },
+          {
+            "<leader>ak",
+            function()
+              require("avante.api").ask({ question = avante_keywords })
+            end,
+            desc = "Keywords(ask)",
+          },
+          {
+            "<leader>al",
+            function()
+              require("avante.api").ask({ question = avante_code_readability_analysis })
+            end,
+            desc = "Code Readability Analysis(ask)",
+          },
+          {
+            "<leader>ao",
+            function()
+              require("avante.api").ask({ question = avante_optimize_code })
+            end,
+            desc = "Optimize Code(ask)",
+          },
+          {
+            "<leader>am",
+            function()
+              require("avante.api").ask({ question = avante_summarize })
+            end,
+            desc = "Summarize text(ask)",
+          },
+          {
+            "<leader>an",
+            function()
+              require("avante.api").ask({ question = avante_translate })
+            end,
+            desc = "Translate text(ask)",
+          },
+          {
+            "<leader>ax",
+            function()
+              require("avante.api").ask({ question = avante_explain_code })
+            end,
+            desc = "Explain Code(ask)",
+          },
+          {
+            "<leader>ac",
+            function()
+              require("avante.api").ask({ question = avante_complete_code })
+            end,
+            desc = "Complete Code(ask)",
+          },
+          {
+            "<leader>ad",
+            function()
+              require("avante.api").ask({ question = avante_add_docstring })
+            end,
+            desc = "Docstring(ask)",
+          },
+          {
+            "<leader>ab",
+            function()
+              require("avante.api").ask({ question = avante_fix_bugs })
+            end,
+            desc = "Fix Bugs(ask)",
+          },
+          {
+            "<leader>au",
+            function()
+              require("avante.api").ask({ question = avante_add_tests })
+            end,
+            desc = "Add Tests(ask)",
+          },
         },
-      },
-    },
+      })
+
+      require("which-key").add({
+        { "<leader>a", group = "Avante" }, -- NOTE: add for avante.nvim
+        {
+          mode = { "v" },
+          {
+            "<leader>aG",
+            function()
+              prefill_edit_window(avante_grammar_correction)
+            end,
+            desc = "Grammar Correction",
+          },
+          {
+            "<leader>aK",
+            function()
+              prefill_edit_window(avante_keywords)
+            end,
+            desc = "Keywords",
+          },
+          {
+            "<leader>aO",
+            function()
+              prefill_edit_window(avante_optimize_code)
+            end,
+            desc = "Optimize Code(edit)",
+          },
+          {
+            "<leader>aC",
+            function()
+              prefill_edit_window(avante_complete_code)
+            end,
+            desc = "Complete Code(edit)",
+          },
+          {
+            "<leader>aD",
+            function()
+              prefill_edit_window(avante_add_docstring)
+            end,
+            desc = "Docstring(edit)",
+          },
+          {
+            "<leader>aB",
+            function()
+              prefill_edit_window(avante_fix_bugs)
+            end,
+            desc = "Fix Bugs(edit)",
+          },
+          {
+            "<leader>aU",
+            function()
+              prefill_edit_window(avante_add_tests)
+            end,
+            desc = "Add Tests(edit)",
+          },
+        },
+      })
+
+      return {
+        provider = "ollama", -- You can then change this provider here
+        vendors = {
+          ollama = {
+            __inherited_from = "openai",
+            api_key_name = "",
+            endpoint = "http://192.168.5.164:11434/v1",
+            model = "deepseek-coder:6.7b",
+          },
+        },
+      }
+    end,
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
     build = "make",
     -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
@@ -234,5 +236,12 @@ return {
         ft = { "markdown", "Avante" },
       },
     },
+  },
+
+  {
+    "github/copilot.vim",
+    config = function()
+      require("copilot").setup({})
+    end,
   },
 }
