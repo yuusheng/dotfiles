@@ -19,7 +19,20 @@ return {
   {
     "sindrets/diffview.nvim",
     config = function()
-      require("diffview").setup()
+      require("diffview").setup({})
     end,
+    keys = {
+      {
+        "<leader>gd",
+        "<Cmd>DiffviewOpen<CR>",
+        desc = "open diffview",
+      },
+      {
+        "<leader>gD",
+        "<Cmd>DiffviewClose<CR>",
+        desc = "close diffview",
+      },
+    },
   },
+  { "akinsho/git-conflict.nvim", version = "*", config = true },
 }
