@@ -24,13 +24,13 @@ keymap.set("n", "<Leader>ss", ":split<Return>", opts)
 keymap.set("n", "<Leader>sv", ":vsplit<Return>", opts)
 
 -- Resize window
-keymap.set("n", "<C-S-h>", "<C-w><")
-keymap.set("n", "<C-S-l>", "<C-w>>")
-keymap.set("n", "<C-S-k>", "<C-w>+")
-keymap.set("n", "<C-S-j>", "<C-w>-")
+keymap.set("n", "<C-S-h>", "<C-w><", opts)
+keymap.set("n", "<C-S-l>", "<C-w>>", opts)
+keymap.set("n", "<C-S-k>", "<C-w>+", opts)
+keymap.set("n", "<C-S-j>", "<C-w>-", opts)
 
 keymap.set("v", "<s-tab>", "<gv", opts)
 keymap.set("v", "<tab>", ">gv", opts)
-keymap.set("n", "<M-Tab>", "<cmd>bNext<CR>")
+keymap.set("n", "<M-Tab>", "<cmd>bNext<CR>", opts)
 
 keymap.set("n", "ZZ", "<cmd>qa<CR>", opts)

@@ -48,6 +48,12 @@ return {
     event = "VeryLazy",
     opts = {
       preset = "helix",
+      spec = {
+        {
+          mode = { "n", "t" },
+          { "<leader>t", group = "terminal" },
+        },
+      },
     },
   },
   {
