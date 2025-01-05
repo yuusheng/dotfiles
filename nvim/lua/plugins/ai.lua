@@ -1,5 +1,5 @@
 -- prefil edit window with common scenarios to avoid repeating query and submit immediately
-local prefill_edit_window = function(request)
+local function prefill_edit_window(request)
   require("avante.api").edit()
   local code_bufnr = vim.api.nvim_get_current_buf()
   local code_winid = vim.api.nvim_get_current_win()
@@ -11,6 +11,18 @@ local prefill_edit_window = function(request)
   vim.api.nvim_win_set_cursor(code_winid, { 1, #request + 1 })
   -- Simulate Ctrl+S keypress to submit
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-s>", true, true, true), "v", true)
+end
+
+---Get env with default value
+---@return string
+local function get_env_with_default(env_key, default_value)
+  local env_value = os.getenv(env_key)
+  vim.print(env_value)
+  if env_value then
+    return env_value
+  else
+    return default_value
+  end
 end
 
 -- NOTE: most templates are inspired from ChatGPT.nvim -> chatgpt-actions.json
@@ -188,14 +200,17 @@ return {
         },
       })
 
+      local ollama_host = get_env_with_default("OLLAMA_HOST", "http://localhost:11434/v1")
+      local model_name = get_env_with_default("AVANTE_MODEL", "deepseek-coder:6.7b")
+      vim.print("ollama_host", ollama_host)
       return {
         provider = "ollama", -- You can then change this provider here
         vendors = {
           ollama = {
             __inherited_from = "openai",
             api_key_name = "",
-            endpoint = "http://192.168.5.164:11434/v1",
-            model = "deepseek-coder:6.7b",
+            endpoint = ollama_host,
+            model = model_name,
           },
         },
       }
