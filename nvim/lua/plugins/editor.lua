@@ -56,7 +56,7 @@ return {
         desc = "open mini.files (directory of current file)",
       },
       {
-        "<leader>fm",
+        "<leader>fM",
         function()
           require("mini.files").open(vim.uv.cwd(), true)
         end,

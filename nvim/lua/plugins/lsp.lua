@@ -14,6 +14,7 @@ return {
         "vtsls",
         "markdownlint-cli2",
         "markdown-toc",
+        "thriftls",
       })
     end,
   },
