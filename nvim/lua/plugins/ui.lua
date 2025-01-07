@@ -97,8 +97,9 @@ return {
   {
     "RRethy/vim-illuminate",
     event = "VeryLazy",
-    config = function()
-      require("illuminate").configure({})
-    end,
+  },
+  {
+    "OXY2DEV/helpview.nvim",
+    ft = "help",
   },
 }

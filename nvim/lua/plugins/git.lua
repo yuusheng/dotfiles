@@ -7,7 +7,7 @@ return {
     keys = {
       {
         ";c",
-        ":LazyGit<Return>",
+        "<Cmd>LazyGit<CR>",
         silent = true,
         noremap = true,
       },
@@ -16,7 +16,6 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
-    config = function() end,
   },
   {
     "sindrets/diffview.nvim",
