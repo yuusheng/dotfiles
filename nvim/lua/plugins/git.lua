@@ -1,3 +1,5 @@
+local keymap = require("which-key")
+
 return {
   {
     "kdheepak/lazygit.nvim",
@@ -18,19 +20,34 @@ return {
   },
   {
     "sindrets/diffview.nvim",
-    config = function()
-      require("diffview").setup({})
-    end,
+    opts = {
+      enhanced_diff_hl = true,
+      hooks = {
+        view_enter = function()
+          keymap.add({
+            {
+              "<leader>gd",
+              "<Cmd>DiffviewClose<CR>",
+              desc = "Close Git Diffview",
+            },
+          })
+        end,
+        view_leave = function()
+          keymap.add({
+            {
+              "<leader>gd",
+              "<Cmd>DiffviewOpen<CR>",
+              desc = "Open Git Diffview",
+            },
+          })
+        end,
+      },
+    },
     keys = {
       {
         "<leader>gd",
         "<Cmd>DiffviewOpen<CR>",
         desc = "open diffview",
-      },
-      {
-        "<leader>gD",
-        "<Cmd>DiffviewClose<CR>",
-        desc = "close diffview",
       },
     },
   },
