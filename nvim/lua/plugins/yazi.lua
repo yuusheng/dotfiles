@@ -18,7 +18,7 @@ return {
     {
       -- NOTE: this requires a version of yazi that includes
       -- https://github.com/sxyazi/yazi/pull/1305 from 2024-07-18
-      "<C-j>",
+      "<C-y>",
       "<cmd>Yazi toggle<cr>",
       desc = "Resume the last yazi session",
     },
@@ -29,6 +29,7 @@ return {
     open_for_directories = false,
     keymaps = {
       show_help = "<f1>",
+      copy_relative_path_to_selected_files = "<D-y>",
     },
   },
 }
