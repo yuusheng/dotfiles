@@ -102,4 +102,26 @@ return {
     "OXY2DEV/helpview.nvim",
     ft = "help",
   },
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    opts = {
+      filesystem = {
+        filtered_items = {
+          always_show = {
+            ".gitignore",
+            ".github",
+            ".nuxt",
+            ".vscode",
+            ".npmrc",
+          },
+          always_show_by_pattern = {
+            ".env*",
+          },
+          never_show = {
+            ".DS_Store",
+          },
+        },
+      },
+    },
+  },
 }

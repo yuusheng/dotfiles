@@ -15,6 +15,7 @@ return {
         "markdownlint-cli2",
         "markdown-toc",
         "thriftls",
+        "protols",
       })
     end,
   },
