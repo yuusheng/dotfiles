@@ -199,11 +199,18 @@ return {
         },
       })
 
-      local ollama_host = get_env_with_default("OLLAMA_HOST", "http://localhost:11434/v1")
-      local model_name = get_env_with_default("AVANTE_MODEL", "deepseek-coder:6.7b")
       return {
-        provider = "copilot",
-        auto_suggestions_provider = "copilot",
+        -- auto_suggestions_provider = "deepseek",
+        provider = "deepseek", -- You can then change this provider here
+        vendors = {
+          ["deepseek"] = {
+            __inherited_from = "openai",
+            api_key_name = "DEEPSEEK_API_KEY",
+            endpoint = "https://api.deepseek.com",
+            model = "deepseek-coder",
+          },
+        },
+
         behaviour = {
           auto_suggestions = true, -- Experimental stage
           auto_apply_diff_after_generation = true,
