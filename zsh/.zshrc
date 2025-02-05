@@ -90,4 +90,5 @@ eval "$(starship init zsh)"
 # yazi default open application
 export EDITOR=nvim
 alias vim="nvim"
+alias vi="nvim"
 
