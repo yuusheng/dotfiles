@@ -7,6 +7,8 @@ theme = catppuccin-mocha
 clipboard-read = allow
 clipboard-write = allow
 
+cursor-style = bar
+
 # macos
 macos-non-native-fullscreen = true
 macos-titlebar-style = tabs

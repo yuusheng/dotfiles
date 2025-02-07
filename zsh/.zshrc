@@ -1,5 +1,10 @@
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+# oh-my-zsh thing
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting z vi-mode)
 source ~/.oh-my-zsh/oh-my-zsh.sh
+bindkey '^_' autosuggest-accept
+export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+
+source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # node script alias
 # dev alias
@@ -26,7 +31,6 @@ alias p="nr publish"
 alias grv="git remote -v"
 alias grs="git remote set-url origin $1"
 
-source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.bash_profile
 
 # bun completions

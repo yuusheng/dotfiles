@@ -29,6 +29,15 @@ keymap.set("n", "<C-S-l>", "<C-w>>", opts)
 keymap.set("n", "<C-S-k>", "<C-w>+", opts)
 keymap.set("n", "<C-S-j>", "<C-w>-", opts)
 
+-- Move cursor at insert mode
+keymap.set("i", "<C-f>", "<Right>", opts)
+keymap.set("i", "<C-b>", "<Left>", opts)
+keymap.set("i", "<C-n>", "<Down>", opts)
+keymap.set("i", "<C-p>", "<Up>", opts)
+keymap.set("i", "<C-h>", "<BackSpace>", opts)
+keymap.set("i", "<C-e>", "<End>", opts)
+keymap.set("i", "<C-a>", "<Home>", opts)
+
 keymap.set("v", "<s-tab>", "<gv", opts)
 keymap.set("v", "<tab>", ">gv", opts)
 keymap.set("n", "<M-Tab>", "<cmd>bNext<CR>", opts)
