@@ -44,19 +44,6 @@ return {
     end,
   },
   {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    opts = {
-      preset = "helix",
-      spec = {
-        {
-          mode = { "n", "t" },
-          { "<leader>t", group = "terminal" },
-        },
-      },
-    },
-  },
-  {
     "rcarriga/nvim-notify",
     opts = {
       timeout = 5000,
