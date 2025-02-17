@@ -33,6 +33,17 @@ return {
     },
   },
   {
+    "ibhagwan/fzf-lua",
+    opts = function(_, opts)
+      opts.grep.rg_glob_fn = function(query)
+        local regex, flags = query:match("^(.-)%s%-%-(.*)$")
+        -- If no separator is detected will return the original query
+        return (regex or query), flags
+      end
+      opts.grep.rg_glob = true
+    end,
+  },
+  {
     "echasnovski/mini.files",
     event = "VeryLazy",
     opts = {
