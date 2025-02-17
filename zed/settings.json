@@ -7,7 +7,7 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
-  "theme": "Xcode Default Dark",
+  "theme": "One Dark",
   "vim_mode": true,
   "relative_line_numbers": true,
   "cursor_blink": false,
