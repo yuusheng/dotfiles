@@ -7,11 +7,19 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "assistant": {
+    "default_model": {
+      "provider": "deepseek",
+      "model": "deepseek-chat"
+    },
+    "version": "2"
+  },
   "theme": "One Dark",
   "vim_mode": true,
   "relative_line_numbers": true,
   "cursor_blink": false,
   "features": {
+    "edit_prediction_provider": "zed",
     "copilot": false
   },
   // "rust-analyzer": {

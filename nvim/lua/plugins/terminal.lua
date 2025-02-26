@@ -27,7 +27,7 @@ return {
       start_in_insert = true,
     },
     keys = {
-      { "<leader>t", "", desc = "+terminal", mode = { "n", "t" } },
+      { "<leader>t", "", desc = "+terminal", mode = { "n" } },
       {
         "<leader>tf",
         function()

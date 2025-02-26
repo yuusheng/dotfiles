@@ -16,6 +16,7 @@ return {
         "markdown-toc",
         "thriftls",
         "protols",
+        "ast-grep",
       })
     end,
   },
@@ -53,7 +54,7 @@ return {
         volar = {
           init_options = {
             vue = {
-              hybridMode = true,
+              hybridMode = false,
             },
           },
           settings = {
@@ -92,7 +93,11 @@ return {
             },
           },
         },
-        vtsls = {},
+        vtsls = {
+          init_options = {
+            provideFormatter = false,
+          },
+        },
         html = {},
         eslint = {
           on_attach = function()
@@ -173,6 +178,29 @@ return {
             },
           },
         },
+        ast_grep = {},
+      },
+      setup = {
+        eslint = function()
+          require("lazyvim.util").lsp.on_attach(function(client)
+            if client.name == "eslint" then
+              client.server_capabilities.documentFormattingProvider = true
+            --- Volar will format vue file sometimes conflict with eslint. Disable for now
+            elseif client.name == "tsserver" or client.name == "volar" then
+              client.server_capabilities.documentFormattingProvider = false
+            end
+          end)
+        end,
+        ast_grep = function()
+          local configs = require("lspconfig.configs")
+          configs.ast_grep = {
+            default_config = {
+              cmd = { "ast-grep", "lsp" },
+              single_file_support = false,
+              root_dir = require("lspconfig.util").root_pattern("sgconfig.yml"),
+            },
+          }
+        end,
       },
     },
   },

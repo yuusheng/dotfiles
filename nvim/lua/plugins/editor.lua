@@ -42,6 +42,38 @@ return {
       end
       opts.grep.rg_glob = true
     end,
+    keys = {
+      {
+        "<leader>sp",
+        function()
+          require("fzf-lua").fzf_live("ast-grep run --color=always -p <query>", {
+            previewer = "builtin",
+            prompt = "Ast Grep>",
+            fzf_opts = {
+              ["--delimiter"] = ":",
+              ["--with-nth"] = "2..",
+            },
+          })
+        end,
+      },
+    },
+  },
+  {
+    "MagicDuck/grug-far.nvim",
+    cmd = "GrugFar",
+    keys = {
+      {
+        "<leader>sA",
+        function()
+          local grug = require("grug-far")
+          grug.open({
+            engine = "astgrep",
+          })
+        end,
+        mode = { "n", "v" },
+        desc = "Search and Replace using ast-grep",
+      },
+    },
   },
   {
     "iamcco/markdown-preview.nvim",

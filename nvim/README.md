@@ -1,7 +1,7 @@
 Current problem:
 
-- [ ] fzf-lua find in folder
-- [x] ESLint
-- [ ] terminal
 - [ ] DAP
-- [ ] Copilot with ollama
+- [x] fzf-lua find in folder
+- [x] ESLint
+- [x] terminal
+- [x] Copilot with ollama
