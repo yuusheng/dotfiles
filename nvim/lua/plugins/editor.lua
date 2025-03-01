@@ -31,6 +31,17 @@ return {
         ["<S-Tab>"] = { "snippet_backward", "fallback" },
       },
     },
+    keys = {
+      {
+        "<M-j>",
+        function()
+          local cmp = require("blink.cmp")
+          cmp.show()
+        end,
+        mode = { "i" },
+        desc = "Active blink.cmp",
+      },
+    },
   },
   {
     "ibhagwan/fzf-lua",
