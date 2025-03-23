@@ -18,6 +18,13 @@ return {
     },
   },
   {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim", -- required
+    },
+    config = true,
+  },
+  {
     "sindrets/diffview.nvim",
     opts = {
       enhanced_diff_hl = true,
