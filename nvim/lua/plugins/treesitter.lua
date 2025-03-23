@@ -26,6 +26,7 @@ return {
         "gowork",
         "gosum",
         "tsx",
+        "sql",
       },
       query_linter = {
         enable = true,

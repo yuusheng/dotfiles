@@ -16,6 +16,12 @@ return {
   {
     "saghen/blink.cmp",
     opts = {
+      sources = {
+        default = { "dadbod" },
+        providers = {
+          dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
+        },
+      },
       keymap = {
         ["<Tab>"] = {
           function(cmp)
@@ -124,5 +130,20 @@ return {
     opts = {
       enable_check_bracket_line = true,
     },
+  },
+  {
+    "stevearc/conform.nvim",
+    opts = function(_, opts)
+      opts.formatters.sqlfluff = {
+        args = { "format", "--dialect=ansi", "-" },
+      }
+
+      local sql_ft = { "sql" }
+
+      for _, ft in ipairs(sql_ft) do
+        opts.formatters_by_ft[ft] = opts.formatters_by_ft[ft] or {}
+        table.insert(opts.formatters_by_ft[ft], "sqlfluff")
+      end
+    end,
   },
 }

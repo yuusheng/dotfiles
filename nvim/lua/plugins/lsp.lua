@@ -17,6 +17,7 @@ return {
         "thriftls",
         "protols",
         "ast-grep",
+        "sqlfluff",
       })
     end,
   },
