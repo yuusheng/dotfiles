@@ -50,32 +50,6 @@ return {
     },
   },
   {
-    "ibhagwan/fzf-lua",
-    opts = function(_, opts)
-      opts.grep.rg_glob_fn = function(query)
-        local regex, flags = query:match("^(.-)%s%-%-(.*)$")
-        -- If no separator is detected will return the original query
-        return (regex or query), flags
-      end
-      opts.grep.rg_glob = true
-    end,
-    keys = {
-      {
-        "<leader>sp",
-        function()
-          require("fzf-lua").fzf_live("ast-grep run --color=always -p <query>", {
-            previewer = "builtin",
-            prompt = "Ast Grep>",
-            fzf_opts = {
-              ["--delimiter"] = ":",
-              ["--with-nth"] = "2..",
-            },
-          })
-        end,
-      },
-    },
-  },
-  {
     "MagicDuck/grug-far.nvim",
     cmd = "GrugFar",
     keys = {

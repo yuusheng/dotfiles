@@ -39,3 +39,6 @@ keymap.set("v", "<tab>", ">gv", opts)
 keymap.set("n", "<M-Tab>", "<cmd>bNext<CR>", opts)
 
 keymap.set("n", "ZZ", "<cmd>qa<CR>", opts)
+
+-- Command related
+keymap.set({ "n", "i", "v" }, "<D-s>", "<cmd>w<CR>", opts)
