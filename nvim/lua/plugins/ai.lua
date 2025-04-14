@@ -219,7 +219,7 @@ return {
         mappings = {
           --- @class AvanteConflictMappings
           suggestion = {
-            accept = "<Tab>",
+            accept = "<M-l>",
             next = "<M-]>",
             prev = "<M-[>",
             dismiss = "<C-]>",
