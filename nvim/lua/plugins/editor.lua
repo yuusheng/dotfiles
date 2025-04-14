@@ -131,6 +131,7 @@ return {
         "nvim-telescope/telescope-live-grep-args.nvim",
         version = "^1.0.0",
       },
+      "Marskey/telescope-sg",
     },
     opts = function()
       -- color scheme setup
@@ -170,10 +171,19 @@ return {
               },
             },
           },
+          ast_grep = {
+            command = {
+              "sg",
+              "--json=stream",
+            }, -- must have --json=stream
+            grep_open_files = false, -- search in opened files
+            lang = nil, -- string value, specify language for ast-grep `nil` for default
+          },
         },
       })
 
       telescope.load_extension("live_grep_args")
+      telescope.load_extension("ast_grep")
     end,
     keys = {
       {
@@ -182,6 +192,11 @@ return {
           require("telescope").extensions.live_grep_args.live_grep_args()
         end,
         desc = "Live grep with args (Root Dir)",
+      },
+      {
+        "<leader>sp",
+        "<cmd>Telescope ast_grep<CR>",
+        desc = "Ast grep",
       },
     },
   },
