@@ -42,10 +42,14 @@ return {
         "<M-j>",
         function()
           local cmp = require("blink.cmp")
-          cmp.show()
+          if cmp.is_visible() then
+            cmp.hide()
+          else
+            cmp.show()
+          end
         end,
         mode = { "i" },
-        desc = "Active blink.cmp",
+        desc = "Toggle blink.cmp",
       },
     },
   },
@@ -119,5 +123,66 @@ return {
         table.insert(opts.formatters_by_ft[ft], "sqlfluff")
       end
     end,
+  },
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = {
+      {
+        "nvim-telescope/telescope-live-grep-args.nvim",
+        version = "^1.0.0",
+      },
+    },
+    opts = function()
+      -- color scheme setup
+      local colors = require("catppuccin.palettes").get_palette()
+      local TelescopeColor = {
+        TelescopeMatching = { fg = colors.flamingo },
+        TelescopeSelection = { fg = colors.text, bg = colors.surface0, bold = true },
+
+        TelescopePromptPrefix = { bg = colors.surface0 },
+        TelescopePromptNormal = { bg = colors.surface0 },
+        TelescopeResultsNormal = { bg = colors.mantle },
+        TelescopePreviewNormal = { bg = colors.mantle },
+        TelescopePromptBorder = { bg = colors.surface0, fg = colors.surface0 },
+        TelescopeResultsBorder = { bg = colors.mantle, fg = colors.mantle },
+        TelescopePreviewBorder = { bg = colors.mantle, fg = colors.mantle },
+        TelescopePromptTitle = { bg = colors.pink, fg = colors.mantle },
+        TelescopeResultsTitle = { fg = colors.mantle },
+        TelescopePreviewTitle = { bg = colors.green, fg = colors.mantle },
+      }
+
+      for hl, col in pairs(TelescopeColor) do
+        vim.api.nvim_set_hl(0, hl, col)
+      end
+
+      -- live grep with args setup
+      local telescope = require("telescope")
+      local lga_actions = require("telescope-live-grep-args.actions")
+
+      telescope.setup({
+        extensions = {
+          live_grep_args = {
+            auto_quoting = true,
+            mappings = {
+              i = {
+                ["<C-k>"] = lga_actions.quote_prompt(),
+                ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+              },
+            },
+          },
+        },
+      })
+
+      telescope.load_extension("live_grep_args")
+    end,
+    keys = {
+      {
+        "<leader>sg",
+        function()
+          require("telescope").extensions.live_grep_args.live_grep_args()
+        end,
+        desc = "Live grep with args (Root Dir)",
+      },
+    },
   },
 }
