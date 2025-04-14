@@ -2,22 +2,6 @@ local keymap = require("which-key")
 
 return {
   {
-    "kdheepak/lazygit.nvim",
-    event = "VeryLazy",
-    keys = {
-      {
-        ";c",
-        "<Cmd>LazyGit<CR>",
-        silent = true,
-        noremap = true,
-      },
-    },
-    -- optional for floating window border decoration
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-  },
-  {
     "NeogitOrg/neogit",
     dependencies = {
       "nvim-lua/plenary.nvim", -- required
