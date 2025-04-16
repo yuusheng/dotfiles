@@ -1,5 +1,5 @@
 # oh-my-zsh thing
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting z vi-mode)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting z)
 source ~/.oh-my-zsh/oh-my-zsh.sh
 bindkey '^_' autosuggest-accept
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
