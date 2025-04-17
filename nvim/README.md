@@ -1,7 +1,4 @@
 Current problem:
 
-- [ ] DAP
-- [x] fzf-lua find in folder
-- [x] ESLint
-- [x] terminal
-- [x] Copilot with ollama
+- [ ] ESLint library position config
+- [ ] Multi cursor horizontal move

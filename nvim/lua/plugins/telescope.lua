@@ -33,6 +33,7 @@ return {
     -- live grep with args setup
     local telescope = require("telescope")
     local lga_actions = require("telescope-live-grep-args.actions")
+    local actions = require("telescope.actions")
 
     telescope.setup({
       defaults = {
@@ -44,6 +45,15 @@ return {
           },
           width = 0.87,
           height = 0.80,
+        },
+      },
+      pickers = {
+        buffers = {
+          mappings = {
+            i = {
+              ["<C-x>"] = actions.delete_buffer + actions.move_to_top,
+            },
+          },
         },
       },
       extensions = {
