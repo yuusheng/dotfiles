@@ -27,6 +27,7 @@ return {
         "gosum",
         "tsx",
         "sql",
+        "comment",
       },
       query_linter = {
         enable = true,
