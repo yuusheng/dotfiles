@@ -111,4 +111,18 @@ return {
       },
     },
   },
+  {
+    "stevearc/oil.nvim",
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {},
+    keys = {
+      {
+        "<leader>o",
+        "<Cmd>Oil<CR>",
+        desc = "Open Oil parent directory",
+      },
+    },
+    lazy = false,
+  },
 }
