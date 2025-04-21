@@ -15,6 +15,7 @@ return {
   },
   {
     "saghen/blink.cmp",
+    event = "VeryLazy",
     opts = {
       sources = {
         per_filetype = { sql = { "dadbod" } },
