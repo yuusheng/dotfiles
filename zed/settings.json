@@ -14,7 +14,7 @@
     },
     "version": "2"
   },
-  "theme": "One Dark",
+  "theme": "Xcode Default Dark",
   "vim_mode": true,
   "relative_line_numbers": true,
   "cursor_blink": false,

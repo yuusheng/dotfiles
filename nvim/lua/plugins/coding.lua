@@ -5,8 +5,27 @@ return {
       local ai = require("mini.ai")
 
       return {
+        n_lines = 500,
         custom_textobjects = {
-          a = ai.gen_spec.treesitter({ a = "@attribute.outer", i = "@attribute.inner" }),
+          o = ai.gen_spec.treesitter({ -- code block
+            a = { "@block.outer", "@conditional.outer", "@loop.outer" },
+            i = { "@block.inner", "@conditional.inner", "@loop.inner" },
+          }),
+          f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }), -- function
+          c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }), -- class
+          t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" }, -- tags
+          d = { "%f[%d]%d+" }, -- digits
+          e = { -- Word with case
+            { "%u[%l%d]+%f[^%l%d]", "%f[%S][%l%d]+%f[^%l%d]", "%f[%P][%l%d]+%f[^%l%d]", "^[%l%d]+%f[^%l%d]" },
+            "^().*()$",
+          },
+          g = LazyVim.mini.ai_buffer, -- buffer
+          u = ai.gen_spec.function_call({ name_pattern = "[%w_%.%!%?]" }),
+          U = ai.gen_spec.function_call({ name_pattern = "[%w_]" }), -- without dot in function name
+          a = ai.gen_spec.treesitter({
+            a = { "@call.outer", "@attribute.outer" },
+            i = { "@call.inner", "@attribute.inner" },
+          }),
         },
       }
     end,
