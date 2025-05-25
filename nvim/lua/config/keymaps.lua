@@ -16,9 +16,6 @@ keymap.set("n", "<Leader>w", ":update<Return>", opts)
 keymap.set("n", "<Leader>q", ":quit<Return>", opts)
 keymap.set("n", "<Leader>Q", ":qa<Return>", opts)
 
--- Ctrl-o for move back, Ctrl-i for move forward
-keymap.set("n", "<C-i>", "<tab>", opts)
-
 -- Resize window
 keymap.set("n", "<C-S-h>", "<C-w><", opts)
 keymap.set("n", "<C-S-l>", "<C-w>>", opts)

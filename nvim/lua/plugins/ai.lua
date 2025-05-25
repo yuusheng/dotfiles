@@ -57,7 +57,6 @@ return {
     "yetone/avante.nvim",
     event = "VeryLazy",
     lazy = true,
-    enabled = false,
     version = false, -- set this if you want to always pull the latest change
     opts = function()
       require("which-key").add({
@@ -201,8 +200,7 @@ return {
       })
 
       return {
-        -- auto_suggestions_provider = "deepseek",
-        provider = "deepseek", -- You can then change this provider here
+        provider = "copilot", -- You can then change this provider here
         vendors = {
           ["deepseek"] = {
             __inherited_from = "openai",
@@ -213,7 +211,7 @@ return {
         },
 
         behaviour = {
-          auto_suggestions = true, -- Experimental stage
+          auto_suggestions = false,
           auto_apply_diff_after_generation = true,
           support_paste_from_clipboard = true,
         },
@@ -226,6 +224,20 @@ return {
             dismiss = "<C-]>",
           },
         },
+        --- @alias FileSelectorProvider "native" | "fzf" | "mini.pick" | "snacks" | "telescope" | string
+        file_selector = {
+          provider = "telescope", -- Avoid native provider issues
+        },
+        system_prompt = function()
+          local hub = require("mcphub").get_hub_instance()
+          return hub and hub:get_active_servers_prompt() or ""
+        end,
+        -- Using function prevents requiring mcphub before it's loaded
+        custom_tools = function()
+          return {
+            require("mcphub.extensions.avante").mcp_tool(),
+          }
+        end,
       }
     end,
     -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
@@ -264,5 +276,12 @@ return {
         ft = { "markdown", "Avante" },
       },
     },
+  },
+  {
+    "ravitemer/mcphub.nvim",
+    build = "npm install -g mcp-hub@latest", -- Installs `mcp-hub` node binary globally
+    config = function()
+      require("mcphub").setup()
+    end,
   },
 }
