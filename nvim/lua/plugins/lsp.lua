@@ -1,8 +1,8 @@
 return {
   {
     "williamboman/mason.nvim",
-    opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, {
+    opts = {
+      ensure_installed = {
         "luacheck",
         "shellcheck",
         "shfmt",
@@ -15,15 +15,12 @@ return {
         "markdownlint-cli2",
         "markdown-toc",
         "thriftls",
+        "pyright",
         "protols",
         "ast-grep",
         "sqlfluff",
-      })
-    end,
-  },
-  {
-    "folke/neoconf.nvim",
-    config = true,
+      },
+    },
   },
   {
     "folke/lazydev.nvim",
@@ -42,7 +39,6 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       inlay_hints = { enabled = true },
-      ---@type lspconfig.options
       servers = {
         cssls = {},
         marksman = {},
@@ -101,16 +97,12 @@ return {
         },
         html = {},
         eslint = {
-          on_attach = function()
-            local key_maps = require("lazyvim.plugins.lsp.keymaps").get()
+          on_attach = function(client, bufnr)
+            client.server_capabilities.documentFormattingProvider = true
 
-            table.insert(key_maps, {
-              "<Leader>lF",
-              function()
-                vim.cmd.EslintFixAll()
-              end,
-              desc = "Format buffer",
-              mode = { "n" },
+            vim.api.nvim_create_autocmd("BufWritePre", {
+              buffer = bufnr,
+              command = "EslintFixAll",
             })
           end,
         },
@@ -204,5 +196,16 @@ return {
         end,
       },
     },
+  },
+  {
+    "mhanberg/output-panel.nvim",
+    version = "*",
+    event = "VeryLazy",
+    config = function()
+      require("output_panel").setup({
+        max_buffer_size = 5000, -- default
+      })
+    end,
+    cmd = { "OutputPanel" },
   },
 }
