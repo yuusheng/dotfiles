@@ -34,6 +34,9 @@ return {
 
           return vim.fs.root(bufnr, { ".git", ".vscode" }) or vim.fs.root(bufnr, { "package.json", "node_modules" })
         end,
+        settings = {
+          workingDirectory = { mode = "auto" },
+        },
       },
     },
     setup = {
