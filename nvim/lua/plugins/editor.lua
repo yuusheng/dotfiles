@@ -84,4 +84,20 @@ return {
       end
     end,
   },
+  {
+    "rmagatti/goto-preview",
+    dependencies = { "rmagatti/logger.nvim" },
+    event = "LazyFile",
+    config = true,
+    keys = {
+      {
+        "gp",
+        "<cmd>lua require('goto-preview').goto_preview_definition()<CR>",
+        desc = "Goto Preview Definition",
+        {
+          noremap = true,
+        },
+      },
+    },
+  },
 }
