@@ -74,10 +74,6 @@ return {
     end,
   },
   {
-    "RRethy/vim-illuminate",
-    event = "VeryLazy",
-  },
-  {
     "OXY2DEV/helpview.nvim",
     ft = "help",
   },

@@ -47,15 +47,6 @@ return {
           opts.settings.nodePath = eslint_neoconf.nodePath or ""
         end
         require("lspconfig").eslint.setup(opts)
-
-        require("lazyvim.util").lsp.on_attach(function(client)
-          if client.name == "eslint" then
-            client.server_capabilities.documentFormattingProvider = true
-            --- Volar will format vue file sometimes conflict with eslint. Disable for now
-          elseif client.name == "tsserver" or client.name == "volar" then
-            client.server_capabilities.documentFormattingProvider = false
-          end
-        end)
       end,
     },
   },
