@@ -4,7 +4,9 @@ return {
   dependencies = {
     -- emoji completion
     "moyiz/blink-emoji.nvim",
+    "xzbdmw/colorful-menu.nvim",
   },
+  version = "1.*",
   opts = {
     sources = {
       per_filetype = { sql = { "dadbod" } },
@@ -13,7 +15,6 @@ return {
         emoji = {
           module = "blink-emoji",
           name = "Emoji",
-          score_offset = 15, -- Tune by preference
         },
       },
       default = {
@@ -24,6 +25,26 @@ return {
       accept = {
         auto_brackets = {
           enabled = false,
+        },
+      },
+      documentation = {
+        auto_show = true,
+      },
+      menu = {
+        draw = {
+          -- We don't need label_description now because label and label_description are already
+          -- combined together in label by colorful-menu.nvim.
+          columns = { { "kind_icon" }, { "label", gap = 1 } },
+          components = {
+            label = {
+              text = function(ctx)
+                return require("colorful-menu").blink_components_text(ctx)
+              end,
+              highlight = function(ctx)
+                return require("colorful-menu").blink_components_highlight(ctx)
+              end,
+            },
+          },
         },
       },
     },
@@ -65,6 +86,7 @@ return {
       end,
       mode = { "i" },
       desc = "Toggle blink.cmp",
+      noremap = true,
     },
   },
 }
