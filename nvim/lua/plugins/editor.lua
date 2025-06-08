@@ -88,6 +88,20 @@ return {
     "rmagatti/goto-preview",
     dependencies = { "rmagatti/logger.nvim" },
     event = "LazyFile",
+    opts = {
+      post_open_hook = function(bufnr)
+        vim.bo[bufnr].buflisted = false
+        vim.schedule(function()
+          vim.keymap.set("n", "q", function()
+            require("goto-preview").close_all_win()
+          end, {
+            buffer = bufnr,
+            silent = true,
+            desc = "Quit go to preview window",
+          })
+        end)
+      end,
+    },
     config = true,
     keys = {
       {

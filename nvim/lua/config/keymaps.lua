@@ -13,8 +13,7 @@ keymap.set("n", "<C-a>", "ggVG", opts)
 
 -- Save file and quit
 keymap.set("n", "<Leader>w", ":update<Return>", opts)
-keymap.set("n", "<Leader>q", ":quit<Return>", opts)
-keymap.set("n", "<Leader>Q", ":qa<Return>", opts)
+keymap.set("n", "<C-c>", ":quit<Return>", opts)
 
 -- Resize window
 keymap.set("n", "<C-S-h>", "<C-w><", opts)

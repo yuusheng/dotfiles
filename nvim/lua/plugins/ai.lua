@@ -201,15 +201,6 @@ return {
 
       return {
         provider = "copilot", -- You can then change this provider here
-        vendors = {
-          ["deepseek"] = {
-            __inherited_from = "openai",
-            api_key_name = "DEEPSEEK_API_KEY",
-            endpoint = "https://api.deepseek.com",
-            model = "deepseek-coder",
-          },
-        },
-
         behaviour = {
           auto_suggestions = false,
           auto_apply_diff_after_generation = true,
