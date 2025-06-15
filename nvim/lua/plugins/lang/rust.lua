@@ -1,12 +1,17 @@
 local diagnostics = vim.g.lazyvim_rust_diagnostics or "rust-analyzer"
 
--- NOTE: Temporary add this until upstream pr merged (https://github.com/LazyVim/LazyVim/pull/6117)
+--- NOTE: Temporary add this until upstream pr merged (https://github.com/lazyvim/lazyvim/pull/6117)
 return {
   {
     "mrcjkb/rustaceanvim",
     version = vim.fn.has("nvim-0.10.0") == 0 and "^4" or false,
     ft = { "rust" },
     opts = {
+      tools = {
+        float_win_config = {
+          border = "rounded",
+        },
+      },
       server = {
         on_attach = function(_, bufnr)
           vim.keymap.set("n", "<leader>cR", function()
@@ -18,6 +23,17 @@ return {
           vim.keymap.set("n", "<leader>p", function()
             vim.cmd.RustLsp("expandMacro")
           end, { desc = "Rust expand macro", buffer = bufnr })
+
+          local keys = require("lazyvim.plugins.lsp.keymaps").get()
+          keys[#keys + 1] = {
+            "K",
+            function()
+              vim.cmd.RustLsp({ "hover", "actions" })
+            end,
+            silent = true,
+            buffer = bufnr,
+            desc = "Rust hover actions",
+          }
         end,
         default_settings = {
           -- rust-analyzer language server configuration
