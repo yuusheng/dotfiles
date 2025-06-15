@@ -1,4 +1,33 @@
 return {
-  "mg979/vim-visual-multi",
-  event = "BufEnter",
+  {
+    "jake-stewart/multicursor.nvim",
+    config = function()
+      local mc = require("multicursor-nvim")
+      mc.setup()
+      mc.addKeymapLayer(function(layerSet)
+        layerSet({ "n", "x" }, "k", mc.prevCursor)
+        layerSet({ "n", "x" }, "j", mc.nextCursor)
+
+        layerSet({ "n", "x" }, "x", mc.deleteCursor)
+
+        layerSet("n", "<esc>", function()
+          if not mc.cursorsEnabled() then
+            mc.enableCursors()
+          else
+            mc.clearCursors()
+          end
+        end)
+      end)
+    end,
+    keys = {
+      {
+        "<C-n>",
+        function()
+          local mc = require("multicursor-nvim")
+          mc.matchAddCursor(1)
+        end,
+        desc = "Multicursor: Add Cursor",
+      },
+    },
+  },
 }
