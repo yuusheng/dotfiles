@@ -24,12 +24,12 @@ return {
             vim.cmd.RustLsp("expandMacro")
           end, { desc = "Rust expand macro", buffer = bufnr })
 
-          local utils = require("plugins.lang.rust.super_hover")
+          local super_hover = require("plugins.lang.rust.super_hover")
           local keys = require("lazyvim.plugins.lsp.keymaps").get()
           keys[#keys + 1] = {
             "K",
             function()
-              utils.hover_actions()
+              super_hover()
             end,
             silent = true,
             buffer = bufnr,

@@ -5,8 +5,6 @@ local async_util = require("plenary.async.util")
 
 local lsp_util = vim.lsp.util
 
-local M = {}
-
 ---@class rustaceanvim.hover_actions.State
 local _state = {
   ---@type integer
@@ -116,7 +114,7 @@ end
 ---@param result table
 local function add_macros_lines(result)
   local lines = {}
-  if err == nil and result ~= nil then
+  if result ~= nil and result.expansion ~= nil then
     table.insert(lines, "---")
     table.insert(lines, "Expand macro: `" .. result.name .. "`")
     table.insert(lines, "```rust\n" .. result.expansion .. "```")
@@ -152,30 +150,29 @@ local function hover_handler(result, ctx)
   return markdown_lines
 end
 
---- Sends the request to rust-analyzer to get hover actions and handle it
-function M.hover_actions()
-  ---@diagnostic disable-next-line: missing-parameter
-  async.run(function()
-    local methods = { "textDocument/hover", "rust-analyzer/expandMacro" }
-    local requests = {}
-    for _, method in ipairs(methods) do
-      local _request = function()
-        return utils.buf_request(0, method)
-      end
-      table.insert(requests, _request)
+local function hover()
+  local methods = { "textDocument/hover", "rust-analyzer/expandMacro" }
+  local requests = {}
+  for _, method in ipairs(methods) do
+    local _request = function()
+      return utils.buf_request(0, method)
     end
+    table.insert(requests, _request)
+  end
 
-    local result = async_util.join(requests)
+  local result = async_util.join(requests)
 
-    local _, hover_result, ctx = unpack(result[1])
-    local _, macro_result = unpack(result[2])
+  local _, hover_result, ctx = unpack(result[1])
+  local _, macro_result = unpack(result[2])
 
-    local hover_lines = hover_handler(hover_result, ctx)
-    local macros_lines = add_macros_lines(macro_result)
-    local markdown_lines = utils.extend_list(hover_lines, macros_lines)
+  local hover_lines = hover_handler(hover_result, ctx)
+  local macros_lines = add_macros_lines(macro_result)
+  local markdown_lines = utils.extend_list(hover_lines, macros_lines)
 
-    hover_float(markdown_lines, hover_result, ctx)
-  end)
+  if #markdown_lines == 0 then
+    return
+  end
+  hover_float(markdown_lines, hover_result, ctx)
 end
 
-return M
+return async.void(hover)
