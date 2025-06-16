@@ -94,13 +94,5 @@ return {
       "<cmd>Telescope ast_grep<CR>",
       desc = "Ast grep",
     },
-    {
-      "<leader>fn",
-      function()
-        require("telescope.builtin").find_files({
-          cwd = vim.fn.stdpath("config"),
-        })
-      end,
-    },
   },
 }

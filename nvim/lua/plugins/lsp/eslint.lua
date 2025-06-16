@@ -47,6 +47,16 @@ return {
           opts.settings.nodePath = eslint_neoconf.nodePath or ""
         end
         require("lspconfig").eslint.setup(opts)
+
+        local formatter = LazyVim.lsp.formatter({
+          name = "eslint: lsp",
+          primary = false,
+          -- eslint after conform.nvim(prettier)
+          priority = 50,
+          filter = "eslint",
+        })
+
+        LazyVim.format.register(formatter)
       end,
     },
   },
