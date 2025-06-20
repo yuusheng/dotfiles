@@ -26,6 +26,7 @@ return {
           local mc = require("multicursor-nvim")
           mc.matchAddCursor(1)
         end,
+        mode = { "n", "v" },
         desc = "Multicursor: Add Cursor",
       },
     },
