@@ -81,6 +81,15 @@ return {
     "nvzone/floaterm",
     dependencies = "nvzone/volt",
     cmd = "FloatermToggle",
+    opts = {
+      mappings = {
+        term = function(buf)
+          vim.keymap.set({ "n", "t" }, "<C-a>", function()
+            require("floaterm.api").new_term()
+          end, { buffer = buf })
+        end,
+      },
+    },
     keys = {
       {
         "<D-j>",
