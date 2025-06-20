@@ -78,53 +78,16 @@ return {
     ft = "help",
   },
   {
-    "nvim-neo-tree/neo-tree.nvim",
-    opts = {
-      filesystem = {
-        filtered_items = {
-          always_show = {
-            ".gitignore",
-            ".github",
-            ".nuxt",
-            ".vscode",
-            ".npmrc",
-          },
-          always_show_by_pattern = {
-            ".env*",
-          },
-          never_show = {
-            ".DS_Store",
-          },
-        },
-      },
-    },
-  },
-  {
-    "stevearc/oil.nvim",
-    ---@module 'oil'
-    ---@type oil.SetupOpts
-    opts = {},
+    "nvzone/floaterm",
+    dependencies = "nvzone/volt",
+    cmd = "FloatermToggle",
     keys = {
       {
-        "<leader>o",
-        "<Cmd>Oil<CR>",
-        desc = "Open Oil parent directory",
-        mode = { "n" },
+        "<D-j>",
+        "<cmd>FloatermToggle<CR>",
+        mode = { "n", "t" },
+        desc = "Toggle float term",
       },
     },
-    lazy = true,
-    config = function()
-      require("oil").setup({
-        delete_to_trash = true,
-        skip_confirm_for_simple_edits = true,
-        view_options = {
-          show_hidden = true,
-          natural_order = true,
-          is_always_hidden = function(name)
-            return name == ".git"
-          end,
-        },
-      })
-    end,
   },
 }
