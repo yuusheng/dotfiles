@@ -5,7 +5,6 @@ return {
       local ai = require("mini.ai")
 
       return {
-        n_lines = 500,
         custom_textobjects = {
           o = ai.gen_spec.treesitter({ -- code block
             a = { "@block.outer", "@conditional.outer", "@loop.outer" },
@@ -29,6 +28,37 @@ return {
         },
       }
     end,
+  },
+
+  {
+    "chrisgrieser/nvim-various-textobjs",
+    event = "VeryLazy",
+    opts = {
+      keymaps = {
+        useDefaults = true,
+      },
+      notify = {
+        whenObjectNotFound = false,
+      },
+    },
+    keys = {
+      {
+        "as",
+        function()
+          require("various-textobjs").subword("outer")
+        end,
+        mode = { "o", "x" },
+        desc = "Select Outer Subword",
+      },
+      {
+        "is",
+        function()
+          require("various-textobjs").subword("inner")
+        end,
+        mode = { "o", "x" },
+        desc = "Select Inner Subword",
+      },
+    },
   },
 
   -- Not using extra as some keys conflict with goto-preview.nvim

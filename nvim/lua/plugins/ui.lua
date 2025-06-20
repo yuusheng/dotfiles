@@ -41,6 +41,7 @@ return {
       }
 
       opts.presets.lsp_doc_border = true
+      opts.lsp.progress = { enabled = false }
     end,
   },
 
@@ -96,6 +97,33 @@ return {
         "<cmd>FloatermToggle<CR>",
         mode = { "n", "t" },
         desc = "Toggle float term",
+      },
+    },
+  },
+  {
+    "nvim-lualine/lualine.nvim",
+    opts = {
+      sections = {
+        lualine_y = {
+          { "location", padding = { left = 0, right = 1 } },
+          {
+            "lsp_status",
+            icon = "", -- f013
+            symbols = {
+              -- Standard unicode symbols to cycle through for LSP progress:
+              spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" },
+              -- Standard unicode symbol for when LSP is done:
+              done = "✓",
+              -- Delimiter inserted between LSP names:
+              separator = " ",
+            },
+            -- List of LSP names to ignore (e.g., `null-ls`):
+            ignore_lsp = {
+              "copilot",
+              "rustowl",
+            },
+          },
+        },
       },
     },
   },
