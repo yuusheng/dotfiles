@@ -164,16 +164,25 @@ return {
     end,
   },
   {
-    "RRethy/nvim-treesitter-textsubjects",
-    config = function()
-      require("nvim-treesitter-textsubjects").configure({
-        prev_selection = ",",
-        keymaps = {
-          ["."] = "textsubjects-smart",
-          [";"] = "textsubjects-container-outer",
-          ["i;"] = "textsubjects-container-inner",
-        },
-      })
-    end,
+    "nvzone/floaterm",
+    dependencies = "nvzone/volt",
+    cmd = "FloatermToggle",
+    opts = {
+      mappings = {
+        term = function(buf)
+          vim.keymap.set({ "n", "t" }, "<C-a>", function()
+            require("floaterm.api").new_term()
+          end, { buffer = buf })
+        end,
+      },
+    },
+    keys = {
+      {
+        "<D-j>",
+        "<cmd>FloatermToggle<CR>",
+        mode = { "n", "t" },
+        desc = "Toggle float term",
+      },
+    },
   },
 }

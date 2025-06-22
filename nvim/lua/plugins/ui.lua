@@ -41,6 +41,7 @@ return {
       }
 
       opts.presets.lsp_doc_border = true
+      -- Too many messages, using lualine lsp_status
       opts.lsp.progress = { enabled = false }
     end,
   },
@@ -77,28 +78,6 @@ return {
   {
     "OXY2DEV/helpview.nvim",
     ft = "help",
-  },
-  {
-    "nvzone/floaterm",
-    dependencies = "nvzone/volt",
-    cmd = "FloatermToggle",
-    opts = {
-      mappings = {
-        term = function(buf)
-          vim.keymap.set({ "n", "t" }, "<C-a>", function()
-            require("floaterm.api").new_term()
-          end, { buffer = buf })
-        end,
-      },
-    },
-    keys = {
-      {
-        "<D-j>",
-        "<cmd>FloatermToggle<CR>",
-        mode = { "n", "t" },
-        desc = "Toggle float term",
-      },
-    },
   },
   {
     "nvim-lualine/lualine.nvim",
