@@ -173,6 +173,8 @@ return {
           vim.keymap.set({ "n", "t" }, "<C-a>", function()
             require("floaterm.api").new_term()
           end, { buffer = buf })
+          -- Normal mode and search
+          vim.keymap.set({ "n", "t" }, "<D-f>", "<C-\\><C-n>/", { buffer = buf })
         end,
       },
     },
