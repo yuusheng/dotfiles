@@ -1,5 +1,5 @@
 return {
-  -- keep this untile https://github.com/LazyVim/LazyVim/issues/6355 resolved
+  -- keep this until https://github.com/LazyVim/LazyVim/issues/6355 resolved
   {
     "catppuccin/nvim",
     opts = function(_, opts)
