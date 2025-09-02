@@ -175,6 +175,8 @@ return {
           end, { buffer = buf })
           -- Normal mode and search
           vim.keymap.set({ "n", "t" }, "<D-f>", "<C-\\><C-n>/", { buffer = buf })
+          vim.keymap.set({ "n", "t" }, "<Esc>", "<C-\\><C-n>", { buffer = buf })
+          vim.keymap.set({ "n", "t" }, "<D-k>", "clear<CR>", { buffer = buf })
         end,
       },
     },
@@ -186,5 +188,12 @@ return {
         desc = "Toggle float term",
       },
     },
+  },
+
+  {
+    "mluders/comfy-line-numbers.nvim",
+    opts = function()
+      require("comfy-line-numbers").setup()
+    end,
   },
 }
