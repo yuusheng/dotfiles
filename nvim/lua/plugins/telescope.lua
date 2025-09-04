@@ -107,5 +107,14 @@ return {
       "kkharji/sqlite.lua",
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     },
+    keys = {
+      {
+        "<leader><Space>",
+        function()
+          require("telescope").extensions.smart_open.smart_open()
+        end,
+        desc = "Smart Open (recently opened files)",
+      },
+    },
   },
 }

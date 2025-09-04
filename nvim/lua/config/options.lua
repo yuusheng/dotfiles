@@ -8,7 +8,6 @@ vim.opt.ignorecase = true -- ignore case in searches by default
 vim.opt.smartcase = true -- but make it case sensitive if an uppercase is entered
 vim.opt.exrc = true -- auto read project level .nvim.lua
 vim.opt.title = true
-vim.opt.laststatus = 0
 
 --- folding
 vim.o.foldcolumn = "0" -- '0' is not bad
