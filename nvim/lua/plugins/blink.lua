@@ -1,6 +1,6 @@
 return {
   "saghen/blink.cmp",
-  event = "VeryLazy",
+  event = { "InsertEnter", "CmdlineEnter" },
   dependencies = {
     -- emoji completion
     "moyiz/blink-emoji.nvim",
@@ -51,6 +51,7 @@ return {
     cmdline = {
       enabled = true,
       completion = {
+        list = { selection = { preselect = true } },
         ghost_text = { enabled = true },
         menu = { auto_show = true },
       },
@@ -61,7 +62,10 @@ return {
     keymap = {
       ["<Tab>"] = {
         function(cmp)
-          if cmp.snippet_active() then
+          -- Snippet first
+          if LazyVim.cmp.actions.snippet_forward() then
+            return true
+          elseif cmp.snippet_active() then
             return cmp.accept()
           else
             return cmp.select_and_accept()

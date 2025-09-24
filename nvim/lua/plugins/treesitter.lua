@@ -1,9 +1,6 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    dependencies = {
-      "nvim-treesitter/playground",
-    },
     event = "VeryLazy",
     opts = {
       ensure_installed = {
@@ -45,21 +42,21 @@ return {
       },
     },
   },
+  -- {
+  --   "RRethy/nvim-treesitter-textsubjects",
+  --   config = function()
+  --     require("nvim-treesitter-textsubjects").configure({
+  --       prev_selection = ",",
+  --       keymaps = {
+  --         ["."] = "textsubjects-smart",
+  --         [";"] = "textsubjects-container-outer",
+  --         ["i;"] = "textsubjects-container-inner",
+  --       },
+  --     })
+  --   end,
+  -- },
   {
-    "RRethy/nvim-treesitter-textsubjects",
-    config = function()
-      require("nvim-treesitter-textsubjects").configure({
-        prev_selection = ",",
-        keymaps = {
-          ["."] = "textsubjects-smart",
-          [";"] = "textsubjects-container-outer",
-          ["i;"] = "textsubjects-container-inner",
-        },
-      })
-    end,
-  },
-  {
-    "echasnovski/mini.ai",
+    "nvim-mini/mini.ai",
     opts = function()
       local ai = require("mini.ai")
 

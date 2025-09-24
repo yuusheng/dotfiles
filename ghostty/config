@@ -1,7 +1,7 @@
 # font & style
 font-family = Maple Mono NF CN
 font-size = 16
-theme = catppuccin-mocha
+theme = Catppuccin Mocha
 
 # clipboard
 clipboard-read = allow
