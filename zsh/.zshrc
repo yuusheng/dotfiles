@@ -1,5 +1,5 @@
 # oh-my-zsh thing
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting z)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 source ~/.oh-my-zsh/oh-my-zsh.sh
 bindkey '^_' autosuggest-accept
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
@@ -90,9 +90,18 @@ export PKG_CONFIG_PATH="/opt/homebrew/opt/postgresql@15/lib/pkgconfig"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
 
 # yazi default open application
 export EDITOR=nvim
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+
 alias vim="nvim"
 alias vi="nvim"
 

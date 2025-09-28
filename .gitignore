@@ -8,12 +8,13 @@
 !zed/settings.json
 !zed/keymap.json
 !wezterm
-!wezterm/*
 !zsh
 !zsh/*
 !tmux
 !tmux/*
-!tmux/**/*
+!.dotter
+!.dotter/*
 tmux/plugins/*
 !start.sh
 .DS_Store
+*.local

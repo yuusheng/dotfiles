@@ -1,0 +1,13 @@
+[helpers]
+
+[default]
+depends = []
+
+[default.files]
+"zsh/.zshrc.zim" = "~/.zshrc"
+"zsh/.zimrc" = "~/.zimrc"
+
+[default.variables]
+
+[settings]
+default_target_type = "automatic"
