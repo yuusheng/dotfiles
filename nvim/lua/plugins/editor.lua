@@ -1,3 +1,18 @@
+local plenary_path = require("plenary.path")
+
+---@parma node_id string
+local function get_path(node_id)
+  ---@type Path
+  local path = plenary_path:new(node_id)
+  assert(type(path) == "table", "Path is not a table")
+
+  if path:is_dir() then
+    return path
+  else
+    return path:parent()
+  end
+end
+
 return {
   -- Hihglight colors
   {
@@ -127,9 +142,28 @@ return {
           },
           always_show_by_pattern = {
             ".env*",
+            ".*rc",
           },
           never_show = {
             ".DS_Store",
+          },
+        },
+        commands = {
+          telescope_grep = function(state)
+            local cwd = vim.uv.cwd()
+            local path = get_path(state.tree:get_node():get_id())
+            local last_directory = path:make_relative(cwd)
+
+            require("telescope").extensions.live_grep_args.live_grep_args({
+              search = "",
+              cwd = last_directory,
+              prompt_title = "Live Grep in " .. last_directory,
+            })
+          end,
+        },
+        window = {
+          mappings = {
+            ["<D-f>"] = "telescope_grep", -- 绑定快捷键
           },
         },
       },

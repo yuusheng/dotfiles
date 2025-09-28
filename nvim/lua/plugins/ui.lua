@@ -1,15 +1,4 @@
 return {
-  -- keep this until https://github.com/LazyVim/LazyVim/issues/6355 resolved
-  {
-    "catppuccin/nvim",
-    opts = function(_, opts)
-      local module = require("catppuccin.groups.integrations.bufferline")
-      if module then
-        module.get = module.get_theme
-      end
-      return opts
-    end,
-  },
   -- messages, cmdline and the popupmenu
   {
     "folke/noice.nvim",

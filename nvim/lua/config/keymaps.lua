@@ -39,3 +39,11 @@ keymap.set("n", "ZZ", "<cmd>qa<CR>", opts)
 
 -- Command related
 keymap.set({ "n", "i", "v" }, "<D-s>", "<cmd>w<CR>", opts)
+
+require("which-key").add({
+  "<leader>ub",
+  "<cmd>GitBlameToggle<CR>",
+  {
+    desc = "Toggle Git Blame",
+  },
+})

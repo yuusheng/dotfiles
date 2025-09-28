@@ -1,6 +1,6 @@
 vim.g.lazyvim_prettier_needs_config = true
 vim.g.lazyvim_eslint_auto_format = true
--- vim.g.root_spec = { { ".git", "lua" }, "lsp", "cwd" }
+vim.g.root_spec = { "package.json", "Cargo.lock", "lsp", { ".git", "lua" }, "cwd" }
 vim.g.snacks_animate = false
 vim.g.gitblame_message_when_not_committed = "" -- no gitblame message when not commit
 
@@ -50,4 +50,4 @@ function _G.custom_foldtext()
   table.insert(result, { " ... ↙ " .. nline .. " lines", "DapBreakpointCondition" })
   return result
 end
-vim.opt.foldtext = "v:lua.custom_foldtext()"
+-- vim.opt.foldtext = "v:lua.custom_foldtext()"

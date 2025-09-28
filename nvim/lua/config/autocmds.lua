@@ -37,3 +37,21 @@ vim.api.nvim_create_autocmd("FileType", {
     end)
   end,
 })
+
+-- Disable lsp format
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = augroup("LspFormatDisabler"),
+  callback = function(event)
+    local SERVERS_TO_DISABLE_FORMAT = {
+      "vue_ls",
+      "vtsls",
+    }
+
+    local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+    if client and vim.tbl_contains(SERVERS_TO_DISABLE_FORMAT, client.name) then
+      client.server_capabilities.documentFormattingProvider = false
+      client.server_capabilities.documentRangeFormattingProvider = false
+    end
+  end,
+})

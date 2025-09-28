@@ -37,6 +37,13 @@ return {
               desc = "Close Git Diffview",
             },
           })
+          keymap.add({
+            {
+              "q",
+              "<Cmd>DiffviewClose<CR>",
+              desc = "Close Git Diffview",
+            },
+          })
         end,
         view_leave = function()
           keymap.add({
@@ -60,9 +67,20 @@ return {
   { "akinsho/git-conflict.nvim", version = "*", config = true },
   {
     "f-person/git-blame.nvim",
+    event = "VeryLazy",
+    ---@module 'gitblame'
+    ---@type SetupOptions
     opts = {
+      enabled = false,
       date_format = "%r",
       message_template = "  <author> 󰔠 <date> 󰈚 <summary>  <sha>",
+    },
+    keys = {
+      {
+        "<leader>go",
+        "<Cmd>GitBlameOpenCommitURL<CR>",
+        desc = "Open Git Commit in browser",
+      },
     },
   },
 }
