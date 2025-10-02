@@ -13,3 +13,5 @@ cursor-style = bar
 macos-non-native-fullscreen = true
 macos-titlebar-style = tabs
 macos-option-as-alt = true
+
+custom-shader = "~/.config/ghostty/shaders/cursor_smear.glsl"

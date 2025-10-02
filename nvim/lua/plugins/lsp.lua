@@ -107,6 +107,7 @@ return {
             },
           },
           ast_grep = {},
+          copilot = { enabled = true },
         },
         setup = {
           ast_grep = function()

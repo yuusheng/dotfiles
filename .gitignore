@@ -1,7 +1,7 @@
 *
 !nvim
 !nvim/*
-!neovide
+!nvim/**/*
 !starship.toml
 !.gitignore
 !zed
@@ -12,9 +12,13 @@
 !zsh/*
 !tmux
 !tmux/*
+tmux/plugins/*
 !.dotter
 !.dotter/*
-tmux/plugins/*
+!ghostty
+!ghostty/*
+!yazi
+!yazi/*
 !start.sh
 .DS_Store
 *.local
