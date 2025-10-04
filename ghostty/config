@@ -15,3 +15,10 @@ macos-titlebar-style = tabs
 macos-option-as-alt = true
 
 custom-shader = "~/.config/ghostty/shaders/cursor_smear.glsl"
+
+keybind = global:opt+y=toggle_quick_terminal
+# split movements, use https://github.com/mrjones2014/smart-splits.nvim#multiplexer-integrations when ready
+keybind = performable:cmd+s>j=goto_split:down
+keybind = performable:cmd+s>k=goto_split:up
+keybind = performable:cmd+s>h=goto_split:left
+keybind = performable:cmd+s>l=goto_split:right

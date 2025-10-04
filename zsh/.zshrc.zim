@@ -89,6 +89,7 @@ bindkey '9;5u' zfm-cd-to-bookmark # ^m
 # local config file
 CONFIG_PATHS=(
   "$HOME/.config/zsh/.zshrc.local"
+  "$HOME/.config/zsh/aliases.zsh"
 )
 
 for FILE in "${CONFIG_PATHS[@]}"; do

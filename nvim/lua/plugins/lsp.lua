@@ -17,10 +17,25 @@ return {
         enableForWorkspaceTypeScriptVersions = true,
       }
 
+      local codesettings = require("codesettings")
+
+      -- global hook
+      vim.lsp.config("*", {
+        before_init = function(_, config)
+          config = codesettings.with_local_settings(config.name, config)
+        end,
+      })
+
       local ret = {
         inlay_hints = { enabled = true },
         servers = {
           cssls = {},
+          eslint = {
+            before_init = function(_, config)
+              local lsp_settings = codesettings.load():get_for_lsp_schema("eslint"):to_tbl()
+              config = require("codesettings.util").merge(config, { settings = lsp_settings.eslint })
+            end,
+          },
           marksman = {},
           protols = {},
           tailwindcss = {
@@ -125,6 +140,15 @@ return {
 
       return vim.tbl_deep_extend("force", opts, ret)
     end,
+  },
+  {
+    "mrjones2014/codesettings.nvim",
+    opts = {
+      config_file_paths = { ".vscode/settings.json", "codesettings.json", "lspsettings.json" },
+      jsonls_integration = true,
+      jsonc_filetype = true,
+    },
+    event = "VeryLazy",
   },
   {
     "mason-org/mason.nvim",
