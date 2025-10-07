@@ -23,18 +23,12 @@ return {
           vim.keymap.set("n", "<leader>p", function()
             vim.cmd.RustLsp("expandMacro")
           end, { desc = "Rust expand macro", buffer = bufnr })
-
-          local super_hover = require("plugins.lang.rust.super_hover")
-          local keys = require("lazyvim.plugins.lsp.keymaps").get()
-          keys[#keys + 1] = {
+          vim.keymap.set(
+            "n",
             "K",
-            function()
-              super_hover()
-            end,
-            silent = true,
-            buffer = bufnr,
-            desc = "Rust hover actions",
-          }
+            require("plugins.lang.rust.super_hover"),
+            { buffer = bufnr, desc = "Rust hover actions" }
+          )
         end,
         default_settings = {
           -- rust-analyzer language server configuration
