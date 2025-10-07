@@ -16,6 +16,8 @@ local eslint_config_files = {
   "eslint.config.cts",
 }
 
+local registered = false
+
 ---@type vim.lsp.Config
 return codesettings.with_local_settings("eslint", {
   cmd = { "vscode-eslint-language-server", "--stdio" },
@@ -33,15 +35,17 @@ return codesettings.with_local_settings("eslint", {
   },
   workspace_required = true,
   on_attach = function()
-    local formatter = LazyVim.lsp.formatter({
-      name = "eslint: lsp",
-      primary = false,
-      priority = 50,
-      filter = "eslint",
-    })
+    if not registered then
+      local formatter = LazyVim.lsp.formatter({
+        name = "eslint: lsp",
+        primary = false,
+        priority = 50,
+        filter = "eslint",
+      })
 
-    -- register the formatter with LazyVim
-    LazyVim.format.register(formatter)
+      LazyVim.format.register(formatter)
+      registered = true
+    end
   end,
   root_dir = function(bufnr, on_dir)
     -- The project root is where the LSP can be started from

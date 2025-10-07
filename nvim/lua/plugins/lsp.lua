@@ -13,6 +13,8 @@ return {
       local codesettings = require("codesettings")
       codesettings.setup(opts)
 
+      LazyVim.format.register(LazyVim.lsp.formatter())
+
       local enabled_lsp = vim
         .iter(vim.api.nvim_get_runtime_file("lsp/*.lua", true))
         :filter(function(f)
