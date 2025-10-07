@@ -1,5 +1,4 @@
 vim.g.lazyvim_prettier_needs_config = true
-vim.g.lazyvim_eslint_auto_format = true
 vim.g.root_spec = { "package.json", "Cargo.lock", "lsp", { ".git", "lua" }, "cwd" }
 vim.g.snacks_animate = false
 vim.g.gitblame_message_when_not_committed = "" -- no gitblame message when not commit
@@ -8,6 +7,23 @@ vim.opt.ignorecase = true -- ignore case in searches by default
 vim.opt.smartcase = true -- but make it case sensitive if an uppercase is entered
 vim.opt.exrc = true -- auto read project level .nvim.lua
 vim.opt.title = true
+vim.opt.titlestring = "%{v:lua.get_title()}"
+
+function _G.get_title()
+  local root = LazyVim.root.get()
+  local root_name = root ~= "" and vim.fn.fnamemodify(root, ":t") or "No Root"
+
+  local file_name = vim.fn.expand("%:t")
+  local status = ""
+  if vim.bo.modified then
+    status = status .. " [+]"
+  end
+  if vim.bo.readonly then
+    status = status .. " [RO]"
+  end
+
+  return string.format("%s | %s%s - Neovim", root_name, file_name, status)
+end
 
 --- folding
 vim.o.foldcolumn = "0" -- '0' is not bad
