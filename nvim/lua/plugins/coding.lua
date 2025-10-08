@@ -9,7 +9,7 @@ return {
     },
     keys = {
       {
-        "<leader>p",
+        "<leader>yh",
         function()
           if LazyVim.pick.picker.name == "telescope" then
             require("telescope").extensions.yank_history.yank_history({})

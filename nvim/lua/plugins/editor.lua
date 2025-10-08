@@ -158,7 +158,7 @@ return {
     "stevearc/oil.nvim",
     keys = {
       {
-        "<leader>o",
+        "<leader>p",
         "<Cmd>Oil<CR>",
         desc = "Open Oil parent directory",
         mode = { "n" },

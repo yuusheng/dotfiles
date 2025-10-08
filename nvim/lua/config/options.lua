@@ -10,7 +10,7 @@ vim.opt.title = true
 vim.opt.titlestring = "%{v:lua.get_title()}"
 
 function _G.get_title()
-  local root = LazyVim.root.get()
+  local root = vim.fn.getcwd()
   local root_name = root ~= "" and vim.fn.fnamemodify(root, ":t") or "No Root"
 
   local file_name = vim.fn.expand("%:t")
