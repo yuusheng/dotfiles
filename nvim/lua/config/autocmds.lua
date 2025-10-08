@@ -22,12 +22,17 @@ vim.api.nvim_create_autocmd("FileType", {
   group = augroup("close_with_q"),
   pattern = {
     "outputpanel",
+    "lsplog",
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
     vim.schedule(function()
       vim.keymap.set("n", "q", function()
-        vim.cmd("close")
+        local success = pcall(vim.cmd, "close", { silent = true })
+        if not success then
+          pcall(vim.cmd, "bd", { silent = true })
+        end
+
         pcall(vim.api.nvim_buf_delete, event.buf, { force = true, silent = true })
       end, {
         buffer = event.buf,

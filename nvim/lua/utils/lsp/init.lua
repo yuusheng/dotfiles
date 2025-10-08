@@ -64,7 +64,20 @@ function M.on_attach_default(client, bufnr)
   vim.api.nvim_create_user_command("LspInfo", ":checkhealth vim.lsp", { desc = "Alias to `:checkhealth vim.lsp`" })
 
   vim.api.nvim_create_user_command("LspLog", function()
-    vim.cmd(string.format("tabnew %s", vim.lsp.log.get_filename())) -- fixed lsp.log reference
+    local log_filename = vim.lsp.log.get_filename()
+
+    if not log_filename or vim.fn.filereadable(log_filename) == 0 then
+      vim.notify("No Lsp log file", vim.log.levels.WARN)
+      return
+    end
+
+    vim.cmd(string.format("e %s", log_filename))
+
+    local _bufnr = vim.api.nvim_get_current_buf()
+    vim.bo[_bufnr].readonly = true
+    vim.bo[_bufnr].buftype = "nofile"
+    vim.bo[_bufnr].swapfile = false -- 避免生成交换文件
+    vim.bo[_bufnr].filetype = "lsplog"
   end, {
     desc = "Opens the Nvim LSP client log.",
   })
