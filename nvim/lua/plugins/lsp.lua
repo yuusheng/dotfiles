@@ -28,38 +28,24 @@ return {
       -- enable all LSPs defined under lsp/
       vim.lsp.enable(enabled_lsp)
 
-      require("mason-lspconfig").setup({
-        ensure_installed = vim.list_extend(enabled_lsp, LazyVim.opts("mason-lspconfig.nvim").ensure_installed or {}),
-      })
-
       vim.lsp.config("*", {
         before_init = function(params, config)
           config = codesettings.with_local_settings(config.name, config)
           return params, config
         end,
       })
+
+      require("mason-lspconfig").setup({
+        ensure_installed = vim.list_extend(enabled_lsp, LazyVim.opts("mason-lspconfig.nvim").ensure_installed or {}),
+      })
     end,
     event = "VeryLazy",
   },
   {
     "mason-org/mason.nvim",
-    dependencies = { "mason-org/mason-lspconfig.nvim", config = function() end },
-    opts = {
-      ensure_installed = {
-        "shellcheck",
-        "shfmt",
-        "tailwindcss-language-server",
-        "typescript-language-server",
-        "css-lsp",
-        "markdownlint-cli2",
-        "markdown-toc",
-        "thriftls",
-        "pyright",
-        "protols",
-        "sqlfluff",
-      },
-    },
+    event = { "BufReadPost", "BufNewFile", "VimEnter" },
   },
+  { "mason-org/mason-lspconfig.nvim", config = function() end },
   {
     "mhanberg/output-panel.nvim",
     version = "*",

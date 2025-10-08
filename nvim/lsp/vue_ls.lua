@@ -1,3 +1,4 @@
+---@type vim.lsp.Config
 return {
   cmd = { "vue-language-server", "--stdio" },
   root_markers = { "package.json" },
