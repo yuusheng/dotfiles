@@ -85,21 +85,6 @@ return {
     },
   },
   {
-    "stevearc/conform.nvim",
-    opts = function(_, opts)
-      opts.formatters.sqlfluff = {
-        args = { "format", "--dialect=ansi", "-" },
-      }
-
-      local sql_ft = { "sql" }
-
-      for _, ft in ipairs(sql_ft) do
-        opts.formatters_by_ft[ft] = opts.formatters_by_ft[ft] or {}
-        table.insert(opts.formatters_by_ft[ft], "sqlfluff")
-      end
-    end,
-  },
-  {
     "rmagatti/goto-preview",
     dependencies = { "rmagatti/logger.nvim" },
     event = "LazyFile",
@@ -171,9 +156,6 @@ return {
   },
   {
     "stevearc/oil.nvim",
-    ---@module 'oil'
-    ---@type oil.SetupOpts
-    opts = {},
     keys = {
       {
         "<leader>o",
@@ -184,6 +166,17 @@ return {
     },
     lazy = true,
     config = function()
+      function _G.get_oil_winbar()
+        local dir = require("oil").get_current_dir()
+        if dir then
+          return vim.fn.fnamemodify(dir, ":~")
+        else
+          return vim.api.nvim_buf_get_name(0)
+        end
+      end
+
+      local detail = false
+
       require("oil").setup({
         delete_to_trash = true,
         skip_confirm_for_simple_edits = true,
@@ -191,8 +184,30 @@ return {
           show_hidden = true,
           natural_order = true,
           is_always_hidden = function(name)
-            return name == ".git"
+            local never_show = { ".git", ".DS_Store" }
+            return vim.tbl_contains(never_show, name)
           end,
+        },
+        keymaps = {
+          ["<C-h>"] = false,
+          ["<C-l>"] = false,
+          ["<C-r>"] = "actions.refresh",
+          ["L"] = "actions.select",
+          ["q"] = "actions.close",
+          ["gd"] = {
+            desc = "Toggle file detail view",
+            callback = function()
+              detail = not detail
+              if detail then
+                require("oil").set_columns({ "icon", "permissions", "size", "mtime" })
+              else
+                require("oil").set_columns({ "icon" })
+              end
+            end,
+          },
+        },
+        win_options = {
+          winbar = "%!v:lua.get_oil_winbar()",
         },
       })
     end,
@@ -224,6 +239,22 @@ return {
     },
   },
 
+  {
+    "nvimdev/lspsaga.nvim",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter", -- optional
+      "nvim-tree/nvim-web-devicons", -- optional
+    },
+    opts = {
+      ui = {
+        code_action = "",
+      },
+      lightbulb = {
+        enable = false,
+        virtual_text = false,
+      },
+    },
+  },
   {
     "mluders/comfy-line-numbers.nvim",
     opts = function()

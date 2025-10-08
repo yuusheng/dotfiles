@@ -55,7 +55,11 @@ return {
     },
     cmd = { "OutputPanel" },
   },
-
+  {
+    "isak102/ghostty.nvim",
+    ft = "conf",
+    opts = {},
+  },
   {
     "neovim/nvim-lspconfig",
     enabled = false,

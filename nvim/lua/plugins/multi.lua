@@ -29,6 +29,24 @@ return {
         mode = { "n", "v" },
         desc = "Multicursor: Add Cursor",
       },
+      {
+        "<leader>ma",
+        function()
+          local mc = require("multicursor-nvim")
+          mc.matchAllAddCursors()
+        end,
+        mode = { "n", "v" },
+        desc = "Multicursor: Add All Cursor",
+      },
+      {
+        "<leader>ms",
+        function()
+          local mc = require("multicursor-nvim")
+          mc.matchSkipCursor(1)
+        end,
+        mode = { "n", "v" },
+        desc = "Multicursor: Skip Cursor",
+      },
     },
   },
 }
