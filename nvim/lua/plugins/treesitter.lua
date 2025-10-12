@@ -75,11 +75,15 @@ return {
             "^().*()$",
           },
           g = LazyVim.mini.ai_buffer, -- buffer
-          u = ai.gen_spec.function_call({ name_pattern = "[%w_%.%!%?]" }),
-          U = ai.gen_spec.function_call({ name_pattern = "[%w_]" }), -- without dot in function name
-          a = ai.gen_spec.treesitter({
-            a = { "@call.outer", "@attribute.outer" },
-            i = { "@call.inner", "@attribute.inner" },
+          -- u = ai.gen_spec.function_call({ name_pattern = "[%w_%.%!%?]" }),
+          -- U = ai.gen_spec.function_call({ name_pattern = "[%w_]" }), -- without dot in function name
+          u = ai.gen_spec.treesitter({
+            a = { "@call.outer" },
+            i = { "@call.inner" },
+          }),
+          p = ai.gen_spec.treesitter({
+            a = { "@parameter.outer", "@attribute.outer" },
+            i = { "@parameter.inner", "@attribute.inner" },
           }),
         },
       }
@@ -91,29 +95,41 @@ return {
     opts = {
       keymaps = {
         useDefaults = true,
+        disabledDefaults = { "io", "ao" },
       },
       notify = {
         whenObjectNotFound = false,
       },
     },
-    keys = {
-      {
-        "as",
-        function()
-          require("various-textobjs").subword("outer")
-        end,
-        mode = { "o", "x" },
-        desc = "Select Outer Subword",
-      },
-      {
-        "is",
-        function()
-          require("various-textobjs").subword("inner")
-        end,
-        mode = { "o", "x" },
-        desc = "Select Inner Subword",
-      },
-    },
+    keys = function()
+      local various = require("various-textobjs")
+      return {
+        {
+          "as",
+          function()
+            various.subword("outer")
+          end,
+          mode = { "o", "x" },
+          desc = "Select Outer Subword",
+        },
+        {
+          "is",
+          function()
+            various.subword("inner")
+          end,
+          mode = { "o", "x" },
+          desc = "Select Inner Subword",
+        },
+        {
+          "n",
+          function()
+            various.subword("nearEoL")
+          end,
+          mode = { "o", "x" },
+          desc = "Select to neear End of Line",
+        },
+      }
+    end,
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
