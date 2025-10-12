@@ -6,6 +6,7 @@ depends = []
 [default.files]
 "zsh/.zshrc.zim" = "~/.zshrc"
 "zsh/.zimrc" = "~/.zimrc"
+"zsh/.zshenv" = "~/.zshenv"
 
 [default.variables]
 

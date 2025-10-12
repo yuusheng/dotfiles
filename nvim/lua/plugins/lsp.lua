@@ -23,6 +23,9 @@ return {
         :map(function(f)
           return vim.fn.fnamemodify(f, ":t:r")
         end)
+        :filter(function(name)
+          return vim.lsp.config[name] ~= nil
+        end)
         :totable()
 
       -- enable all LSPs defined under lsp/
@@ -34,6 +37,11 @@ return {
           return params, config
         end,
       })
+
+      -- filter custom lcp so mason not handle that
+      enabled_lsp = vim.tbl_filter(function(str)
+        return not string.find(str, "_custom")
+      end, enabled_lsp)
 
       require("mason-lspconfig").setup({
         ensure_installed = vim.list_extend(enabled_lsp, LazyVim.opts("mason-lspconfig.nvim").ensure_installed or {}),

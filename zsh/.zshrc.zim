@@ -81,9 +81,6 @@ for key ('j') bindkey -M vicmd ${key} history-substring-search-down
 unset key
 # }}} End configuration added by Zim install
 
-eval "$(fnm env --use-on-cd --shell zsh)"
-export PATH="$HOME/.cargo/bin:$PATH"
-
 bindkey '9;5u' zfm-cd-to-bookmark # ^m
 
 # local config file
@@ -108,3 +105,6 @@ function y() {
 	rm -f -- "$tmp"
 }
 
+
+# bun completions
+[ -s "/Users/yuusheng/.bun/_bun" ] && source "/Users/yuusheng/.bun/_bun"

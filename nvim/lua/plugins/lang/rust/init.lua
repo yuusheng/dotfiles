@@ -20,9 +20,6 @@ return {
           vim.keymap.set("n", "<leader>dr", function()
             vim.cmd.RustLsp("debuggables")
           end, { desc = "Rust Debuggables", buffer = bufnr })
-          vim.keymap.set("n", "<leader>p", function()
-            vim.cmd.RustLsp("expandMacro")
-          end, { desc = "Rust expand macro", buffer = bufnr })
           vim.keymap.set(
             "n",
             "K",
