@@ -31,30 +31,8 @@ return {
         use_virtual_text = true,
         lint_events = { "BufWrite", "CursorHold" },
       },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<D-k>",
-          node_incremental = "<D-k>",
-          scope_incremental = false,
-          node_decremental = "<D-j>",
-        },
-      },
     },
   },
-  -- {
-  --   "RRethy/nvim-treesitter-textsubjects",
-  --   config = function()
-  --     require("nvim-treesitter-textsubjects").configure({
-  --       prev_selection = ",",
-  --       keymaps = {
-  --         ["."] = "textsubjects-smart",
-  --         [";"] = "textsubjects-container-outer",
-  --         ["i;"] = "textsubjects-container-inner",
-  --       },
-  --     })
-  --   end,
-  -- },
   {
     "nvim-mini/mini.ai",
     opts = function()

@@ -4,13 +4,6 @@ local opts = { noremap = true, silent = true }
 keymap.set({ "n", "v" }, "x", '"_x', opts)
 keymap.set({ "n", "v" }, "c", '"_c', opts)
 
--- Increment/decrement
-keymap.set("n", "+", "<C-a>", opts)
-keymap.set("n", "-", "<C-x>", opts)
-
--- Select all
-keymap.set("n", "<C-a>", "ggVG", opts)
-
 -- Save file and quit
 keymap.set("n", "<Leader>w", ":update<Return>", opts)
 keymap.set("n", "<C-c>", ":quit<Return>", opts)

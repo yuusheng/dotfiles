@@ -46,23 +46,16 @@ return {
     },
   },
   {
-    "iamcco/markdown-preview.nvim",
-    event = "VeryLazy",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    ft = { "markdown" },
-    build = function(plugin)
-      if vim.fn.executable("npx") then
-        vim.cmd("!cd " .. plugin.dir .. " && cd app && npx --yes yarn install")
-      else
-        vim.cmd([[lazy load markdown-preview.nvim]])
-        vim.fn["mkdp#util#install"]()
-      end
-    end,
-    init = function()
-      if vim.fn.executable("npx") then
-        vim.g.mkdp_filetypes = { "markdown" }
-      end
-    end,
+    "chrisgrieser/nvim-spider",
+    lazy = true,
+    opts = {
+      subwordMovement = false,
+    },
+    keys = {
+      { "w", "<cmd>lua require('spider').motion('w')<CR>", mode = { "n", "o", "x" } },
+      { "e", "<cmd>lua require('spider').motion('e')<CR>", mode = { "n", "o", "x" } },
+      { "b", "<cmd>lua require('spider').motion('b')<CR>", mode = { "n", "o", "x" } },
+    },
   },
   {
     "ethanholz/nvim-lastplace",
@@ -241,6 +234,7 @@ return {
 
   {
     "nvimdev/lspsaga.nvim",
+    event = "BufRead",
     dependencies = {
       "nvim-treesitter/nvim-treesitter", -- optional
       "nvim-tree/nvim-web-devicons", -- optional

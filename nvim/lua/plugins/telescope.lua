@@ -1,3 +1,10 @@
+---load telescope extensions
+LazyVim.on_load("telescope.nvim", function()
+  local telescope = require("telescope")
+  telescope.load_extension("live_grep_args")
+  telescope.load_extension("ast_grep")
+end)
+
 return {
   {
     "nvim-telescope/telescope.nvim",
@@ -8,7 +15,7 @@ return {
       },
       "Marskey/telescope-sg",
     },
-    opts = function()
+    opts = function(_, opts)
       -- color scheme setup
       local colors = require("catppuccin.palettes").get_palette()
       local TelescopeColor = {
@@ -31,56 +38,50 @@ return {
         vim.api.nvim_set_hl(0, hl, col)
       end
 
-      -- live grep with args setup
-      local telescope = require("telescope")
-      local lga_actions = require("telescope-live-grep-args.actions")
-      local actions = require("telescope.actions")
+      opts.defaults = vim.tbl_deep_extend("force", opts.defaults or {}, {
+        sorting_strategy = "ascending",
+        layout_config = {
+          horizontal = {
+            prompt_position = "top",
+            preview_width = 0.55,
+          },
+          width = 0.87,
+          height = 0.80,
+        },
+      })
 
-      telescope.setup({
-        defaults = {
-          sorting_strategy = "ascending",
-          layout_config = {
-            horizontal = {
-              prompt_position = "top",
-              preview_width = 0.55,
+      local actions = require("telescope.actions")
+      opts.pickers = vim.tbl_deep_extend("force", opts.pickers, {
+        buffers = {
+          mappings = {
+            i = {
+              ["<C-x>"] = actions.delete_buffer + actions.move_to_top,
             },
-            width = 0.87,
-            height = 0.80,
-          },
-        },
-        pickers = {
-          buffers = {
-            mappings = {
-              i = {
-                ["<C-x>"] = actions.delete_buffer + actions.move_to_top,
-              },
-            },
-          },
-        },
-        extensions = {
-          live_grep_args = {
-            auto_quoting = true,
-            mappings = {
-              i = {
-                ["<C-k>"] = lga_actions.quote_prompt(),
-                ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
-                ["<C-l>"] = lga_actions.quote_prompt({ postfix = " --no-ignore" }),
-              },
-            },
-          },
-          ast_grep = {
-            command = {
-              "sg",
-              "--json=stream",
-            }, -- must have --json=stream
-            grep_open_files = false, -- search in opened files
-            lang = nil, -- string value, specify language for ast-grep `nil` for default
           },
         },
       })
 
-      telescope.load_extension("live_grep_args")
-      telescope.load_extension("ast_grep")
+      local lga_actions = require("telescope-live-grep-args.actions")
+      opts.extensions = {
+        live_grep_args = {
+          auto_quoting = true,
+          mappings = {
+            i = {
+              ["<C-k>"] = lga_actions.quote_prompt(),
+              ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+              ["<C-l>"] = lga_actions.quote_prompt({ postfix = " --no-ignore" }),
+            },
+          },
+        },
+        ast_grep = {
+          command = {
+            "sg",
+            "--json=stream",
+          }, -- must have --json=stream
+          grep_open_files = false, -- search in opened files
+          lang = nil, -- string value, specify language for ast-grep `nil` for default
+        },
+      }
     end,
     keys = {
       {

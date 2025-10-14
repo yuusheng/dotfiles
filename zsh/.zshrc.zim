@@ -105,6 +105,6 @@ function y() {
 	rm -f -- "$tmp"
 }
 
-
+eval "$(fnm env --use-on-cd --shell zsh)"
 # bun completions
 [ -s "/Users/yuusheng/.bun/_bun" ] && source "/Users/yuusheng/.bun/_bun"
