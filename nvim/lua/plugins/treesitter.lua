@@ -106,6 +106,8 @@ return {
           mode = { "o", "x" },
           desc = "Select to neear End of Line",
         },
+        { "ir", "i[", mode = { "o", "x" } },
+        { "ar", "a[", mode = { "o", "x" } },
       }
     end,
   },
