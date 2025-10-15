@@ -3,6 +3,7 @@ LazyVim.on_load("telescope.nvim", function()
   local telescope = require("telescope")
   telescope.load_extension("live_grep_args")
   telescope.load_extension("ast_grep")
+  telescope.load_extension("smart_open")
 end)
 
 return {
@@ -14,6 +15,13 @@ return {
         version = "^1.0.0",
       },
       "Marskey/telescope-sg",
+      {
+        "danielfalk/smart-open.nvim",
+        branch = "0.2.x",
+        dependencies = {
+          "kkharji/sqlite.lua",
+        },
+      },
     },
     opts = function(_, opts)
       -- color scheme setup
@@ -86,9 +94,7 @@ return {
     keys = {
       {
         "<leader>sg",
-        function()
-          require("telescope").extensions.live_grep_args.live_grep_args()
-        end,
+        "<cmd>Telescope live_grep_args<CR>",
         desc = "Live grep with args (Root Dir)",
       },
       {
@@ -96,24 +102,9 @@ return {
         "<cmd>Telescope ast_grep<CR>",
         desc = "Ast grep",
       },
-    },
-  },
-  {
-    "danielfalk/smart-open.nvim",
-    branch = "0.2.x",
-    config = function()
-      require("telescope").load_extension("smart_open")
-    end,
-    dependencies = {
-      "kkharji/sqlite.lua",
-      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-    },
-    keys = {
       {
         "<leader><Space>",
-        function()
-          require("telescope").extensions.smart_open.smart_open()
-        end,
+        "<cmd>Telescope smart_open<CR>",
         desc = "Smart Open (recently opened files)",
       },
     },
