@@ -6,6 +6,7 @@ return {
         visual = "sa",
         visual_line = "sA",
       },
+      move_cursor = "sticky",
     },
   },
 }
