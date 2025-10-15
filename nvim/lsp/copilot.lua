@@ -1,3 +1,7 @@
+if not vim.g.ai_cmp then
+  return
+end
+
 ---@param bufnr integer,
 ---@param client vim.lsp.Client
 local function sign_in(bufnr, client)

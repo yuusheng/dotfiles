@@ -55,8 +55,9 @@ local avante_add_tests = "Implement tests for the following code"
 return {
   {
     "yetone/avante.nvim",
-    event = "VeryLazy",
+    event = "BufRead",
     lazy = true,
+    enabled = vim.g.ai_cmp,
     version = false, -- set this if you want to always pull the latest change
     opts = function()
       require("which-key").add({
@@ -289,6 +290,12 @@ return {
         },
         default = { "avante" },
       },
+    },
+  },
+  {
+    "folke/sidekick.nvim",
+    opts = {
+      nes = { enabled = vim.g.ai_cmp },
     },
   },
 }

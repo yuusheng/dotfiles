@@ -12,6 +12,10 @@ local vue_plugin = {
   enableForWorkspaceTypeScriptVersions = true,
 }
 
+if vim.g.use_tsgo then
+  return
+end
+
 ---@type vim.lsp.Config
 return {
   cmd = { "vtsls", "--stdio" },
