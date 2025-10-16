@@ -17,9 +17,6 @@ return {
           name = "Emoji",
         },
       },
-      default = {
-        "emoji",
-      },
     },
     completion = {
       accept = {

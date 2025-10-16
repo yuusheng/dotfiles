@@ -1,0 +1,12 @@
+{
+  "async main": {
+    "prefix": "amain",
+    "body": [
+      "#[tokio::main]",
+      "async fn main() {",
+      "    ${1:todo!();}",
+      "}"
+    ],
+    "description": "async main (…) { … }"
+  }
+}
