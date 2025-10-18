@@ -23,6 +23,8 @@ tmux/plugins/*
 !yazi
 !yazi/*
 !start.sh
+!install.txt
 .DS_Store
 *.local
 local.*
+

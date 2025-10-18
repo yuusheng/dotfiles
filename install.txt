@@ -1,0 +1,18 @@
+# general
+zoxide
+direnv
+starship
+neovim
+fish
+fisher
+fzf
+neovim
+
+# node
+fnm
+
+# python
+uv
+
+# go
+go

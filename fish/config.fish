@@ -12,17 +12,6 @@ function fish_greeting
     fastfetch
 end
 
-function fish_set_var
-    set CONFIG_PATHS \
-        "$HOME/.config/fish/local.fish"
-
-    for FILE in $CONFIG_PATHS
-        if test -f "$FILE"
-            source "$FILE"
-        end
-    end
-end
-
 if status is-interactive
     starship init fish | source
     fnm env --use-on-cd --shell fish | source
@@ -31,5 +20,4 @@ if status is-interactive
     fzf --fish | source
 
     fish_user_key_bindings
-    fish_set_var
 end
