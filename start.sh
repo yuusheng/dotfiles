@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PACKAGE_FILE="./install.txt"
+PACKAGE_FILE="$HOME/.config/install.txt"
 
 # homebrew
 if ! command -v brew &>/dev/null; then

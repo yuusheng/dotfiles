@@ -4,6 +4,10 @@
 
 Using `start.sh` to install homebrew, rust and all used homebrew packages
 
+```bash
+sh start.sh
+```
+
 ## Nvim
 
 - plugins:
