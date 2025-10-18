@@ -1,5 +1,9 @@
 # Yuusheng's dotfiles
 
+## Bootstrap
+
+Using `start.sh` to install homebrew, rust and all used homebrew packages
+
 ## Nvim
 
 - plugins:
