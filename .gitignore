@@ -10,6 +10,9 @@
 !wezterm
 !zsh
 !zsh/*
+!fish
+!fish/*
+!fish/**/*
 !tmux
 !tmux/*
 tmux/plugins/*
@@ -22,3 +25,4 @@ tmux/plugins/*
 !start.sh
 .DS_Store
 *.local
+local.*
