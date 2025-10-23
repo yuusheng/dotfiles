@@ -28,18 +28,11 @@ function M.on_attach(callback)
   })
 end
 
-function M.on_attach_default(client, bufnr)
+function M.on_attach_default(client)
   -- if current nvim version supports inlay hints, enable them
   if vim.lsp["inlay_hint"] ~= nil and client.supports_method(Methods.textDocument_inlayHint) then
     vim.lsp.inlay_hint.enable(true)
   end
-
-  vim.api.nvim_create_autocmd("CursorHold", {
-    callback = function()
-      vim.diagnostic.open_float(nil, { focus = false, scope = "cursor", border = "none" })
-    end,
-    buffer = bufnr,
-  })
 
   vim.api.nvim_create_user_command("LspRestart", function(info)
     M.lsp_restart(info)

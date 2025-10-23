@@ -1,11 +1,6 @@
-local diagnostics = vim.g.lazyvim_rust_diagnostics or "rust-analyzer"
-
---- NOTE: Temporary add this until upstream pr merged (https://github.com/lazyvim/lazyvim/pull/6117)
 return {
   {
     "mrcjkb/rustaceanvim",
-    version = vim.fn.has("nvim-0.10.0") == 0 and "^4" or false,
-    ft = { "rust" },
     opts = {
       tools = {
         float_win_config = {
