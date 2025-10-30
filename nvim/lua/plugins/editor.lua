@@ -254,4 +254,17 @@ return {
       require("comfy-line-numbers").setup()
     end,
   },
+  {
+    "folke/which-key.nvim",
+    opts = function(_, opts)
+      opts.spec = opts.spec or {}
+
+      for i = 1, 9 do
+        table.insert(opts.spec, {
+          "<leader>" .. i,
+          hidden = true,
+        })
+      end
+    end,
+  },
 }
