@@ -5,33 +5,33 @@ generated_at = "2025-10-20T15:58:41.386704Z"
 name = "jorgebucaran/autopair.fish"
 source = "https://github.com/jorgebucaran/autopair.fish/archive/HEAD.tar.gz"
 installed_files = [
-    "functions/_autopair_insert_right.fish",
-    "functions/_autopair_insert_left.fish",
-    "functions/_autopair_backspace.fish",
     "conf.d/autopair.fish",
-    "functions/_autopair_tab.fish",
+    "functions/_autopair_backspace.fish",
+    "functions/_autopair_insert_left.fish",
+    "functions/_autopair_insert_right.fish",
     "functions/_autopair_insert_same.fish",
+    "functions/_autopair_tab.fish",
 ]
 
 [[plugins]]
 name = "jhillyerd/plugin-git"
 source = "https://github.com/jhillyerd/plugin-git/archive/HEAD.tar.gz"
 installed_files = [
-    "functions/glp.fish",
-    "functions/gunwip.fish",
-    "functions/gwip.fish",
+    "conf.d/git.fish",
     "functions/__git.branch_has_wip.fish",
     "functions/__git.current_branch.fish",
-    "functions/grt.fish",
-    "functions/__git.destroy.fish",
-    "functions/gignored.fish",
-    "conf.d/git.fish",
-    "functions/grename.fish",
-    "functions/gbda.fish",
-    "functions/gtest.fish",
     "functions/__git.default_branch.fish",
+    "functions/__git.destroy.fish",
     "functions/__git.init.fish",
-    "functions/gtl.fish",
-    "functions/gdv.fish",
     "functions/gbage.fish",
+    "functions/gbda.fish",
+    "functions/gdv.fish",
+    "functions/gignored.fish",
+    "functions/glp.fish",
+    "functions/grename.fish",
+    "functions/grt.fish",
+    "functions/gtest.fish",
+    "functions/gtl.fish",
+    "functions/gunwip.fish",
+    "functions/gwip.fish",
 ]
