@@ -38,4 +38,15 @@ return {
       { "=P", "<Plug>(YankyPutBeforeFilter)", desc = "Put Before Applying a Filter" },
     },
   },
+  {
+    "folke/which-key.nvim",
+    opts = {
+      spec = {
+        {
+          "<leader>y",
+          group = "yanky",
+        },
+      },
+    },
+  },
 }
