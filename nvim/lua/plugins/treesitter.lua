@@ -73,7 +73,7 @@ return {
     opts = {
       keymaps = {
         useDefaults = true,
-        disabledDefaults = { "io", "ao" },
+        disabledDefaults = { "io", "ao", "n" },
       },
       notify = {
         whenObjectNotFound = false,
@@ -81,6 +81,12 @@ return {
     },
     keys = function()
       local various = require("various-textobjs")
+      local core = require("various-textobjs.charwise-core")
+
+      local function smallForward()
+        return require("various-textobjs.config.config").config.forwardLooking.small
+      end
+
       return {
         {
           "as",
@@ -100,8 +106,13 @@ return {
         },
         {
           "n",
+          -- A more powerful n motion command. Eg. 3n could jump to the 3rd next search result.
           function()
-            various.subword("nearEoL")
+            local count = (vim.v.count == 0 and 1 or vim.v.count) - 1
+            local pattern = "().(%S%s*)$"
+            local row, _, endCol = core.getTextobjPos(pattern, "inner", 0)
+            local targetCol = math.max(0, endCol - count)
+            core.selectFromCursorTo({ row, targetCol }, smallForward())
           end,
           mode = { "o", "x" },
           desc = "Select to neear End of Line",

@@ -259,6 +259,7 @@ return {
     opts = function(_, opts)
       opts.spec = opts.spec or {}
 
+      -- hide harpoon keymaps
       for i = 1, 9 do
         table.insert(opts.spec, {
           "<leader>" .. i,
