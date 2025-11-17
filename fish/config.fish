@@ -20,4 +20,19 @@ if status is-interactive
     fzf --fish | source
 
     fish_user_key_bindings
+
+    abbr s "nr start"
+    abbr d "nr dev"
+    abbr b "nr build"
+    abbr pre "nr preview"
+    abbr bw "nr build --watch"
+    abbr t "nr test"
+    abbr tu "nr test -u"
+    abbr tw "nr test --watch"
+    abbr serve "nr serve"
+    abbr prd "nr prd"
+    abbr lint "nr lint"
+    abbr lf "nr lint --fix"
+    abbr nio "ni --prefer-offline"
+    abbr play "nr play"
 end
