@@ -43,7 +43,7 @@ return {
   {
     "folke/sidekick.nvim",
     opts = {
-      nes = { enabled = vim.g.ai_cmp },
+      nes = { enabled = false },
     },
   },
 }

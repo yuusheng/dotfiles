@@ -28,13 +28,12 @@
     "lazyvim.plugins.extras.ui.treesitter-context",
     "lazyvim.plugins.extras.util.dot",
     "lazyvim.plugins.extras.util.mini-hipatterns",
-    "lazyvim.plugins.extras.util.project",
-    "lazyvim.plugins.extras.util.rest"
+    "lazyvim.plugins.extras.util.project"
   ],
   "install_version": 7,
   "news": {
     "NEWS.md": "11866",
-    "doc/news.txt": "25358"
+    "doc/news.txt": "25446"
   },
   "version": 8
 }
