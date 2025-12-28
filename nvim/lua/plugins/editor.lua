@@ -108,6 +108,7 @@ return {
   },
   {
     "nvim-neo-tree/neo-tree.nvim",
+    enabled = false,
     opts = {
       filesystem = {
         filtered_items = {
@@ -141,7 +142,7 @@ return {
         },
         window = {
           mappings = {
-            ["<D-f>"] = "telescope_grep", -- 绑定快捷键
+            ["<D-f>"] = "telescope_grep",
           },
         },
       },
@@ -151,7 +152,7 @@ return {
     "stevearc/oil.nvim",
     keys = {
       {
-        "<leader>p",
+        "<leader>e",
         "<Cmd>Oil<CR>",
         desc = "Open Oil parent directory",
         mode = { "n" },
@@ -185,8 +186,15 @@ return {
           ["<C-h>"] = false,
           ["<C-l>"] = false,
           ["<C-r>"] = "actions.refresh",
-          ["L"] = "actions.select",
+          ["l"] = "actions.select",
+          ["h"] = "actions.parent",
           ["q"] = "actions.close",
+          ["<leader>e"] = "actions.close",
+          -- relative
+          ["<leader>yr"] = { "actions.yank_entry", opts = { modify = ":." } },
+          -- absolute
+          ["<leader>ya"] = { "actions.yank_entry" },
+
           ["gd"] = {
             desc = "Toggle file detail view",
             callback = function()
@@ -197,6 +205,16 @@ return {
                 require("oil").set_columns({ "icon" })
               end
             end,
+          },
+          ["<leader>ff"] = {
+            function()
+              require("telescope.builtin").find_files({
+                cwd = require("oil").get_current_dir(),
+              })
+            end,
+            mode = "n",
+            nowait = true,
+            desc = "Find files in the current directory",
           },
         },
         win_options = {
