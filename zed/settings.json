@@ -1,34 +1,18 @@
-// Zed settings
-//
-// For information on how to configure Zed, see the Zed
-// documentation: https://zed.dev/docs/configuring-zed
-//
-// To see all of Zed's default settings without changing your
-// custom settings, run the `open default settings` command
-// from the command palette or from `Zed` application menu.
 {
+  "ui_font_family": "Fira Code",
   "agent": {
     "default_model": {
       "provider": "deepseek",
       "model": "deepseek-chat"
-    },
-    "version": "2"
+    }
   },
-  "theme": "Xcode Default Dark",
+  "theme": "Xcode Classic Dark",
   "vim_mode": true,
-  "relative_line_numbers": true,
+  "relative_line_numbers": "enabled",
   "cursor_blink": false,
   "features": {
-    "edit_prediction_provider": "zed",
-    "copilot": false
+    "edit_prediction_provider": "zed"
   },
-  // "rust-analyzer": {
-  //   "initialization_options": {
-  //     "check": {
-  //       "command": "clippy" // rust-analyzer.check.command (default: "check")
-  //     }
-  //   }
-  // },
   "autosave": "off",
   "auto_update": true,
   "ui_font_size": 16,
@@ -38,9 +22,9 @@
     "line_height": {
       "custom": 1.3
     },
-    "font_family": "JetBrainsMono Nerd Font Mono"
+    "font_family": "Maple Mono"
   },
-  "buffer_font_family": "Fira Code",
+  "buffer_font_family": "Maple Mono",
   "inlay_hints": {
     "enabled": true,
     "show_type_hints": true,

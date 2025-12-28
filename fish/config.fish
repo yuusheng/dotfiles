@@ -1,6 +1,7 @@
 set -gx EDITOR vim
 fish_add_path /opt/homebrew/bin/
 fish_add_path $HOME/.cargo/bin
+fish_add_path $HOME/.local/bin
 
 # Add all Emacs mode bindings to vi mode
 function fish_user_key_bindings
@@ -9,7 +10,6 @@ function fish_user_key_bindings
 end
 
 function fish_greeting
-    fastfetch
 end
 
 if status is-interactive

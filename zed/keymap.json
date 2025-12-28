@@ -13,7 +13,8 @@
     "context": "Editor",
     "bindings": {
       "alt-j": "editor::ShowCompletions",
-      "cmd-k cmd-s": "zed::OpenKeymap"
+      "cmd-k cmd-s": "zed::OpenKeymap",
+      "ctrl-s": "workspace::Save"
     }
   },
   // vim related
@@ -21,18 +22,16 @@
     // movement between terminal and editor or project tree.
     "context": "Dock || VimControl || Terminal",
     "bindings": {
-      "ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
-      "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"],
-      "ctrl-k": ["workspace::ActivatePaneInDirection", "Up"],
-      "ctrl-j": ["workspace::ActivatePaneInDirection", "Down"]
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-j": "workspace::ActivatePaneDown"
     }
   },
   {
     "context": "VimControl && !menu",
     "bindings": {
       "w": "vim::NextSubwordStart",
-      "b": "vim::PreviousSubwordStart",
-      "e": "vim::NextSubwordEnd",
       "g e": "vim::PreviousSubwordEnd",
       "shift-h": "pane::ActivatePrevItem",
       "shift-l": "pane::ActivateNextItem",
@@ -49,7 +48,7 @@
   {
     "context": "vim_mode == visual",
     "bindings": {
-      "shift-s": ["vim::PushOperator", { "AddSurrounds": {} }]
+      "s a": "vim::PushAddSurrounds"
     }
   },
   {
@@ -58,7 +57,6 @@
       "alt-j": "editor::MoveLineDown",
       "alt-k": "editor::MoveLineUp",
       "cmd-m": "editor::GoToDiagnostic",
-      "cmd-shift-m": "editor::GoToPrevDiagnostic",
       "shift-u": "editor::Redo"
     }
   },
