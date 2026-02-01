@@ -27,4 +27,4 @@ tmux/plugins/*
 .DS_Store
 *.local
 local.*
-
+!Brewfile
