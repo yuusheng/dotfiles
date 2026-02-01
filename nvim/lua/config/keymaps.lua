@@ -7,6 +7,7 @@ keymap.set({ "n", "v" }, "c", '"_c', opts)
 -- Save file and quit
 keymap.set("n", "<Leader>w", ":update<Return>", opts)
 keymap.set("n", "<C-c>", ":quit<Return>", opts)
+keymap.set("n", "<D-a>", "ggVG", opts)
 
 -- Resize window
 keymap.set("n", "<C-S-h>", "<C-w><", opts)

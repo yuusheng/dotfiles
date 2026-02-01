@@ -26,6 +26,9 @@ keybind = performable:cmd+s>h=goto_split:left
 keybind = performable:cmd+s>l=goto_split:right
 keybind = shift+enter=text:\x1b\r
 
+# unbind super + a to avoid conflicts with nvim select all
+keybind = super+a=unbind
+
 
 # Entry point
 keybind = alt+v=activate_key_table:vim

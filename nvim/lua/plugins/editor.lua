@@ -239,7 +239,18 @@ return {
           -- Normal mode and search
           vim.keymap.set({ "n", "t" }, "<D-f>", "<C-\\><C-n>/", { buffer = buf })
           vim.keymap.set({ "n", "t" }, "<Esc>", "<C-\\><C-n>", { buffer = buf })
-          vim.keymap.set({ "n", "t" }, "<D-k>", "clear<CR>", { buffer = buf })
+          vim.keymap.set({ "n", "t" }, "<D-k>", function()
+            if vim.bo.buftype ~= "terminal" then
+              return
+            end
+
+            local job_id = vim.b.terminal_job_id
+            if not job_id then
+              return
+            end
+
+            vim.fn.chansend(job_id, "printf '\\033c'\n")
+          end, { buffer = buf })
         end,
       },
     },
