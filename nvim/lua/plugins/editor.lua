@@ -185,6 +185,9 @@ return {
         keymaps = {
           ["<C-h>"] = false,
           ["<C-l>"] = false,
+          ["<C-s>"] = false,
+          ["<leader>s"] = { "actions.select", opts = { vertical = true } },
+          ["<leader>h"] = { "actions.select", opts = { horizontal = true } },
           ["<C-r>"] = "actions.refresh",
           ["l"] = "actions.select",
           ["h"] = "actions.parent",
@@ -285,5 +288,34 @@ return {
         })
       end
     end,
+  },
+  {
+    "mrjones2014/smart-splits.nvim",
+    keys = {
+      {
+        "<C-h>",
+        function()
+          require("smart-splits").move_cursor_left()
+        end,
+      },
+      {
+        "<C-j>",
+        function()
+          require("smart-splits").move_cursor_down()
+        end,
+      },
+      {
+        "<C-k>",
+        function()
+          require("smart-splits").move_cursor_up()
+        end,
+      },
+      {
+        "<C-l>",
+        function()
+          require("smart-splits").move_cursor_right()
+        end,
+      },
+    },
   },
 }
