@@ -21,6 +21,9 @@
 !yazi/*
 !aerospace
 !aerospace/*
+!zellij
+!zellij/*
+!zellij/**/*
 !start.sh
 !install.txt
 !Brewfile
