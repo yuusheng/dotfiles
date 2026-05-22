@@ -46,64 +46,39 @@ return {
     end,
   },
 
-  -- filename
-  {
-    "b0o/incline.nvim",
-    dependencies = {},
-    event = "BufReadPre",
-    priority = 1200,
-    config = function()
-      local helpers = require("incline.helpers")
-      require("incline").setup({
-        window = {
-          padding = 0,
-          margin = { horizontal = 0 },
-        },
-        render = function(props)
-          local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
-          local ft_icon, ft_color = require("nvim-web-devicons").get_icon_color(filename)
-          local modified = vim.bo[props.buf].modified
-          local buffer = {
-            ft_icon and { " ", ft_icon, " ", guibg = ft_color, guifg = helpers.contrast_color(ft_color) } or "",
-            " ",
-            { filename, gui = modified and "bold,italic" or "bold" },
-            " ",
-            guibg = "#363944",
-          }
-          return buffer
-        end,
-      })
-    end,
-  },
   {
     "OXY2DEV/helpview.nvim",
     ft = "help",
   },
   {
     "nvim-lualine/lualine.nvim",
-    opts = {
-      sections = {
-        lualine_y = {
-          { "location", padding = { left = 0, right = 1 } },
-          {
-            "lsp_status",
-            icon = "", -- f013
-            symbols = {
-              -- Standard unicode symbols to cycle through for LSP progress:
-              spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" },
-              -- Standard unicode symbol for when LSP is done:
-              done = "✓",
-              -- Delimiter inserted between LSP names:
-              separator = " ",
-            },
-            -- List of LSP names to ignore (e.g., `null-ls`):
-            ignore_lsp = {
-              "copilot",
-              "rustowl",
-            },
+    opts = function(_, opts)
+      opts.sections.lualine_c = {
+        opts.sections.lualine_c[1],
+        opts.sections.lualine_c[2],
+        opts.sections.lualine_c[3],
+      }
+
+      opts.sections.lualine_y = {
+        { "location", padding = { left = 0, right = 1 } },
+        {
+          "lsp_status",
+          icon = "", -- f013
+          symbols = {
+            -- Standard unicode symbols to cycle through for LSP progress:
+            spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" },
+            -- Standard unicode symbol for when LSP is done:
+            done = "✓",
+            -- Delimiter inserted between LSP names:
+            separator = " ",
+          },
+          -- List of LSP names to ignore (e.g., `null-ls`):
+          ignore_lsp = {
+            "copilot",
+            "rustowl",
           },
         },
-      },
-    },
+      }
+    end,
   },
 }

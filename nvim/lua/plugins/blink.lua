@@ -57,22 +57,7 @@ return {
       },
     },
     keymap = {
-      ["<Tab>"] = {
-        -- Snippet first
-        "snippet_forward",
-        function(cmp)
-          if cmp.snippet_active() then
-            return cmp.accept()
-          else
-            return cmp.select_and_accept()
-          end
-        end,
-        function() -- sidekick next edit suggestion
-          return require("sidekick").nes_jump_or_apply()
-        end,
-        "fallback",
-      },
-      ["<S-Tab>"] = { "snippet_backward", "fallback" },
+      preset = "super-tab",
     },
   },
   keys = {

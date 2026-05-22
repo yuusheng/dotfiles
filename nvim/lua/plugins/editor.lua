@@ -16,11 +16,6 @@ end
 return {
   -- Hihglight colors
   {
-    "nvim-mini/mini.hipatterns",
-    event = "BufReadPre",
-    config = true,
-  },
-  {
     "rhysd/accelerated-jk",
     event = "VeryLazy",
     keys = {
@@ -56,10 +51,6 @@ return {
       { "e", "<cmd>lua require('spider').motion('e')<CR>", mode = { "n", "o", "x" } },
       { "b", "<cmd>lua require('spider').motion('b')<CR>", mode = { "n", "o", "x" } },
     },
-  },
-  {
-    "ethanholz/nvim-lastplace",
-    config = true,
   },
   {
     "windwp/nvim-ts-autotag",
@@ -265,20 +256,18 @@ return {
   },
 
   {
-    "nvimdev/lspsaga.nvim",
-    event = "BufRead",
+    "Bekaboo/dropbar.nvim",
+    -- optional, but required for fuzzy finder support
     dependencies = {
-      "nvim-treesitter/nvim-treesitter", -- optional
+      "nvim-telescope/telescope-fzf-native.nvim",
+      build = "make",
     },
-    opts = {
-      ui = {
-        code_action = "",
-      },
-      lightbulb = {
-        enable = false,
-        virtual_text = false,
-      },
-    },
+    config = function()
+      local dropbar_api = require("dropbar.api")
+      vim.keymap.set("n", "<Leader>;", dropbar_api.pick, { desc = "Pick symbols in winbar" })
+      vim.keymap.set("n", "[;", dropbar_api.goto_context_start, { desc = "Go to start of current context" })
+      vim.keymap.set("n", "];", dropbar_api.select_next_context, { desc = "Select next context" })
+    end,
   },
   {
     "mluders/comfy-line-numbers.nvim",
@@ -326,6 +315,58 @@ return {
         function()
           require("smart-splits").move_cursor_right()
         end,
+      },
+    },
+  },
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        rust = { "rustfmt", lsp_format = "fallback" },
+      },
+    },
+  },
+  {
+    "dmtrKovalenko/fff.nvim",
+    build = function()
+      -- downloads a prebuilt binary or falls back to cargo build
+      require("fff.download").download_or_build_binary()
+    end,
+    opts = {
+      debug = {
+        enabled = true,
+        show_scores = true,
+      },
+    },
+    lazy = false, -- the plugin lazy-initialises itself
+    keys = {
+      {
+        "ff",
+        function()
+          require("fff").find_files()
+        end,
+        desc = "FFFind files",
+      },
+      {
+        "fg",
+        function()
+          require("fff").live_grep()
+        end,
+        desc = "LiFFFe grep",
+      },
+      {
+        "fz",
+        function()
+          require("fff").live_grep({ grep = { modes = { "fuzzy", "plain" } } })
+        end,
+        desc = "Live fffuzy grep",
+      },
+      {
+        "fc",
+        function()
+          require("fff").live_grep({ query = vim.fn.expand("<cword>") })
+        end,
+        desc = "Search current word",
       },
     },
   },
