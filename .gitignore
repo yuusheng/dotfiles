@@ -13,8 +13,6 @@
 !fish
 !fish/*
 !fish/**/*
-!.dotter
-!.dotter/*
 !ghostty
 !ghostty/*
 !yazi
@@ -28,9 +26,12 @@
 !zellij
 !zellij/*
 !zellij/**/*
-!start.sh
-!install.txt
+!bootstrap.sh
 !Brewfile
+!scripts/
+!scripts/**
+!tests/
+!tests/**
 .DS_Store
 *.local
 local.*

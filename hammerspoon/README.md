@@ -47,7 +47,9 @@ configuration loaded:
 hs -c 'return hs.configdir, #featureLoader.started'
 ```
 
-The expected module count is `8`.
+The expected module count is `7`. The automatic Homebrew upgrade module is
+kept available but disabled by default so updates remain an intentional
+`brew bundle` workflow.
 
 ## Directory layout
 
