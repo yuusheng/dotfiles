@@ -7,12 +7,55 @@ automatically after the file is saved.
 The tracked source lives at `~/.config/hammerspoon`. Hammerspoon discovers it
 through the `~/.hammerspoon` symlink, so no custom configuration path is needed.
 
+## Set up a new Mac
+
+This setup supports Apple Silicon Macs with Homebrew at `/opt/homebrew`.
+
+If `~/.config` does not exist or is completely empty, clone the dotfiles repo:
+
+```sh
+git clone git@github.com:yuusheng/dotfiles.git ~/.config
+```
+
+If `~/.config` already contains files, stop here. Back it up and merge it into
+the repository manually; do not delete or overwrite the directory with the
+clone command.
+
+Preview the machine-local changes, then apply them:
+
+```sh
+cd ~/.config
+./hammerspoon/setup.sh --dry-run
+./hammerspoon/setup.sh
+```
+
+The script installs only Lua, Hammerspoon, and AeroSpace when they are missing.
+It creates `~/.hammerspoon` and `~/.aerospace.toml` links, accepts existing
+correct links, and stops without overwriting conflicting paths.
+
+On a new Mac, AeroSpace exits before starting its command server until it has
+Accessibility permission. The first setup run may therefore stop after opening
+AeroSpace. Grant **AeroSpace** access in **System Settings → Privacy & Security
+→ Accessibility**, then run `./hammerspoon/setup.sh` again. The second run
+waits for AeroSpace to become ready before opening Hammerspoon.
+
+If Hammerspoon then requests the same permission, grant it and reload
+Hammerspoon (or run the setup script once more). Finally verify that the
+configuration loaded:
+
+```sh
+hs -c 'return hs.configdir, #featureLoader.started'
+```
+
+The expected module count is `8`.
+
 ## Directory layout
 
 ```text
 hammerspoon/
 ├── init.lua                 # entry point
 ├── features.lua             # feature flags
+├── setup.sh                 # idempotent setup for a new Mac
 ├── core/                    # shared loading infrastructure
 ├── modules/
 │   ├── reading/             # Apple Books navigation
@@ -64,6 +107,10 @@ Hammerspoon does not change the input source. English and Chinese input remain
 managed by WeChat Input.
 
 ## Rollback
+
+The timestamped rollback scripts below are local artifacts from the original
+Mac and `/Users/yuusheng` account. They are not synchronized by Git and must
+not be run on another Mac.
 
 Restore the active Hammerspoon configuration to the exact snapshot from before
 the folder migration:

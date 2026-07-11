@@ -24,6 +24,7 @@ create a second generated copy under either path.
   PaperWM, and application switching.
 - `modules/system/` contains media, input-source, reload, and Spoon setup.
 - `tests/` mirrors the functional module groups.
+- `setup.sh` performs fail-closed, idempotent setup on a new Apple Silicon Mac.
 - `Spoons/` contains vendored third-party code. Do not reorganize or edit it as
   part of first-party refactors. Source revisions are recorded in
   `SPOONS.lock`.
@@ -68,6 +69,21 @@ for test_file in $tests; do
 done
 ```
 
+Every Lua test bootstraps modules from
+`os.getenv("HOME") .. "/.config/hammerspoon"` and asserts that
+`core.module_loader` resolves inside that tree. Do not reintroduce usernames or
+depend on the current working directory.
+
+Run the isolated setup tests separately:
+
+```zsh
+zsh tests/setup_test.zsh
+```
+
+There must be exactly seven `*_test.lua` files plus one `setup_test.zsh`. The
+setup tests use a temporary HOME and stubbed Homebrew/application commands; do
+not change them to install or launch real software.
+
 Check syntax for first-party Lua only:
 
 ```zsh
@@ -97,6 +113,22 @@ multi-file move or a change that temporarily breaks imports, first disable
 `reload_configuration` in `features.lua` and confirm the module has stopped,
 or quit Hammerspoon. Restore the flag and launch/reload only after syntax and
 tests pass.
+
+`setup.sh` must complete every source, Git-root, link-conflict, platform, and
+Homebrew preflight before its first write. It must check symlinks with `-L`
+before `-e`, accept semantically correct relative links, reject dangling or
+incorrect links, and never remove or move conflicts. Its `SETUP_*` environment
+overrides are internal test hooks only; production defaults remain
+`/opt/homebrew`, `/Applications`, and `/usr/bin/open`.
+
+New-machine startup is intentionally two-phase because AeroSpace exits before
+its command server starts when Accessibility is not granted. Open AeroSpace
+first; if its CLI server is not ready, instruct the user to grant permission
+and rerun setup. Never start Hammerspoon until the AeroSpace CLI responds.
+
+On a new Mac, clone into `~/.config` only when that directory is absent or
+empty. If it already contains configuration, require a backup and manual Git
+merge instead of replacing it.
 
 Never overwrite user changes when the surrounding `~/.config` Git worktree is
 dirty. Inspect status first and limit staging to this subproject, for example:

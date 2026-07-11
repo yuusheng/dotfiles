@@ -1,4 +1,7 @@
-package.path = "/Users/yuusheng/.hammerspoon/?.lua;" .. package.path
+local home = assert(os.getenv("HOME"), "HOME is required")
+local configRoot = home .. "/.config/hammerspoon"
+package.path = configRoot .. "/?.lua;" .. package.path
+assert(package.searchpath("core.module_loader", package.path) == configRoot .. "/core/module_loader.lua")
 
 local modules = {
     (require("modules.window_management.aerospace_feature")),
