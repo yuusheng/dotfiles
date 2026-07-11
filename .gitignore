@@ -23,6 +23,8 @@
 !omniwm/*
 !aerospace
 !aerospace/*
+!hammerspoon
+!hammerspoon/**/*
 !zellij
 !zellij/*
 !zellij/**/*

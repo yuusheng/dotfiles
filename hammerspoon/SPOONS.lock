@@ -1,0 +1,18 @@
+Installed: 2026-07-11
+
+Hammerspoon/Spoons
+source: https://github.com/Hammerspoon/Spoons.git
+commit: 5c20bcecc380acff5f0f5df7a718c5679aaaf62a
+packages:
+  - SpoonInstall.spoon
+  - ReloadConfiguration.spoon
+  - LeftRightHotkey.spoon
+  - AppWindowSwitcher.spoon
+
+mogenson/PaperWM.spoon
+source: https://github.com/mogenson/PaperWM.spoon.git
+commit: 34787bf38ce429a84f94ae00a73418e32cc1abb8
+packages:
+  - PaperWM.spoon
+
+No Spoon is updated automatically during Hammerspoon reload.

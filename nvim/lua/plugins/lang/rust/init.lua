@@ -27,6 +27,7 @@ return {
   },
   {
     "cordx56/rustowl",
+    enabled = false, -- Disable this plugin for now, it's not ready for prime time
     version = "*", -- Latest stable version
     build = "cargo binstall rustowl",
     lazy = false, -- This plugin is already lazy
