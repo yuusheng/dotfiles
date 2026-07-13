@@ -90,7 +90,8 @@ git pull --ff-only
 
 Normal bootstrap runs use Homebrew Bundle's `--no-upgrade` mode: missing
 dependencies are installed, but unrelated outdated packages are not upgraded.
-Automatic daily `brew upgrade` is also disabled.
+The separate Hammerspoon wake-time Homebrew upgrade feature is currently
+enabled in `hammerspoon/features.lua`.
 
 When you intentionally want to update every dependency declared in the shared
 and machine-local manifests, run:
@@ -105,7 +106,7 @@ silently drift apart.
 ## Keyboard layers
 
 - **Right Command** is the global Hammerspoon layer for AeroSpace windows,
-  workspaces, application switching, and media controls.
+  workspaces, all-window search, application switching, and media controls.
 - **Ctrl/Alt + h/j/k/l** is the common pane-navigation vocabulary inside
   terminal and editor applications.
 - **Space/Leader** owns application-local actions in Neovim and Zed.

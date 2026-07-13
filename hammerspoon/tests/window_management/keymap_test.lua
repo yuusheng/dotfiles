@@ -28,12 +28,17 @@ for _, module in ipairs(modules) do
     end
 end
 
-assert(total == 43, "expected 43 right-Command bindings, got " .. total)
+assert(total == 44, "expected 44 right-Command bindings, got " .. total)
 assert(seen["rCmd+h"] == "focus_left")
 assert(seen["lShift+rCmd+l"] == "swap_right")
 assert(seen["rCmd+t"] == "ghostty")
 assert(seen["rCmd+b"] == "browser")
 assert(seen["rCmd+space"] == "play_pause")
 assert(seen["rCmd+."] == "next")
+assert(seen["rCmd+,"] == nil, "comma must stay unbound")
+assert(seen["rCmd+]"] == "toggle_tiling_layout")
+assert(seen["lShift+rCmd+]"] == "join_right")
+assert(seen["rCmd+a"] == "window_chooser")
+assert(seen["rCmd+tab"] == nil, "Cmd-Tab is reserved by macOS")
 
 print("keymap tests passed")

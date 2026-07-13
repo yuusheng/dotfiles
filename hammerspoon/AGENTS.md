@@ -100,10 +100,9 @@ configuration:
 hs -c 'return hs.configdir, #featureLoader.started'
 ```
 
-The normal enabled state has 7 started modules, 43 registered Right Command
+The normal enabled state has 8 started modules, 44 registered Right Command
 hotkeys, and one ReloadConfiguration watcher. PaperWM and input-source modules
-should be absent. The automatic Homebrew upgrade module is also disabled by
-default. When testing `hs.reload()` through the `hs` CLI, the client
+should be absent. When testing `hs.reload()` through the `hs` CLI, the client
 may exit noisily while the Lua state is replaced; wait briefly and query again
 instead of treating that client-side exception as a Hammerspoon crash.
 

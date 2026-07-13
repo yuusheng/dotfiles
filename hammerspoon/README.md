@@ -47,9 +47,8 @@ configuration loaded:
 hs -c 'return hs.configdir, #featureLoader.started'
 ```
 
-The expected module count is `7`. The automatic Homebrew upgrade module is
-kept available but disabled by default so updates remain an intentional
-`brew bundle` workflow.
+The expected module count is `8`, including the enabled automatic Homebrew
+upgrade module.
 
 ## Directory layout
 
@@ -82,16 +81,19 @@ AeroSpace:
 - `Right Cmd + Left Shift + r`: reverse-cycle column width
 - `Right Cmd + f`: toggle AeroSpace fullscreen (fills width and height, not macOS native fullscreen)
 - `Right Cmd + c`: balance all tiled window sizes in the workspace
-- `Right Cmd + [` / `]`: join with the window to the left/right
+- `Right Cmd + [`: join with the window to the left
+- `Right Cmd + Left Shift + ]`: join with the window to the right
 - `Right Cmd + v`: toggle floating
+- `Right Cmd + ]`: toggle the current container between tiles and accordion
 - `Right Cmd + 1..9`: switch to that AeroSpace workspace
 - `Right Cmd + Left Shift + 1..9`: move the window to that workspace and follow it
+- `Right Cmd + a`: search every AeroSpace window across all workspaces; Enter switches workspace and focuses it
 
 AeroSpace workspaces are virtual and dynamic, so switching to a new number does
 not create a macOS Space or show the macOS Space animation. AeroSpace is an
 i3-like tree tiler, not PaperWM's scrolling layout.
 
-Application switching (already-open windows on the current Space):
+Direct application shortcuts (already-open windows on the current Space):
 
 - `Right Cmd + t`: Ghostty
 - `Right Cmd + b`: Arc or Google Chrome
@@ -101,7 +103,7 @@ Application switching (already-open windows on the current Space):
 Media:
 
 - `Right Cmd + Space`: play/pause
-- `Right Cmd + ,` / `.`: previous/next
+- `Right Cmd + .`: next track
 - `Right Cmd + -` / `=`: volume down/up
 - `Right Cmd + 0`: mute
 

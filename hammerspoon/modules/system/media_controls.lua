@@ -1,7 +1,6 @@
 local M = {
     keymap = {
         { mods = { "rCmd" }, key = "space", action = "play_pause", systemKey = "PLAY" },
-        { mods = { "rCmd" }, key = ",", action = "previous", systemKey = "PREVIOUS" },
         { mods = { "rCmd" }, key = ".", action = "next", systemKey = "NEXT" },
         { mods = { "rCmd" }, key = "-", action = "volume_down", systemKey = "SOUND_DOWN", repeatable = true },
         { mods = { "rCmd" }, key = "=", action = "volume_up", systemKey = "SOUND_UP", repeatable = true },

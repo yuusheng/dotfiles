@@ -30,7 +30,7 @@ on-mode-changed = []
     outer.top = 0
     outer.right = 0
 
-# Intentionally empty. Hammerspoon binds right Command and calls the AeroSpace CLI.
+# Intentionally empty. Hammerspoon owns the unified Right Command layer.
 [mode.main.binding]
 
 [[on-window-detected]]

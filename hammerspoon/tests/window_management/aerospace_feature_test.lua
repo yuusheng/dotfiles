@@ -5,7 +5,7 @@ assert(package.searchpath("core.module_loader", package.path) == configRoot .. "
 
 local aerospace = require("modules.window_management.aerospace_feature")
 
-assert(#aerospace.keymap == 33, "expected 33 AeroSpace bindings")
+assert(#aerospace.keymap == 35, "expected 35 AeroSpace bindings")
 assert(aerospace.windowRatios[1] == 1 / 2)
 assert(aerospace.windowRatios[2] == 2 / 3)
 assert(aerospace.windowRatios[3] == 3 / 4)
@@ -31,6 +31,23 @@ assert(table.concat(commands.workspace_3, " ") == "workspace 3")
 assert(table.concat(commands.move_workspace_3, " ") == "move-node-to-workspace --focus-follows-window 3")
 assert(table.concat(commands.fullscreen, " ") == "fullscreen")
 assert(table.concat(commands.balance, " ") == "balance-sizes")
+assert(table.concat(commands.toggle_tiling_layout, " ") == "layout accordion tiles")
+assert(commands.window_chooser == nil, "window chooser is a dynamic action")
+
+local choices = aerospace.parseWindowList(table.concat({
+    "15920\t1\tcompany.thebrowser.Browser\tArc\tTaste Skill",
+    "11581\t4\tcom.mitchellh.ghostty\tGhostty\t.config",
+    "15897\t10\tcom.openai.chat\tChatGPT\tChatGPT",
+}, "\n"))
+assert(#choices == 3, "all AeroSpace windows must become chooser entries")
+assert(choices[1].workspace == "1" and choices[1].text == "Arc")
+assert(choices[2].workspace == "4" and choices[2].windowID == "11581")
+assert(choices[3].workspace == "10", "numeric workspaces must sort naturally")
+assert(choices[2].subText:match("Workspace 4") and choices[2].subText:match("%.config"))
+
+local selectionCommands = aerospace.windowSelectionCommands(choices[2])
+assert(table.concat(selectionCommands[1], " ") == "workspace 4")
+assert(table.concat(selectionCommands[2], " ") == "focus --window-id 11581")
 
 local started = {}
 local callbacks = {}
