@@ -135,10 +135,29 @@ test_plugin_failure_is_visible() {
     rm -rf "$fixture"
 }
 
+test_recovers_from_deleted_caller_directory() {
+    make_fixture
+    stub cargo 'exit 0'
+    stub brew 'exit 0'
+    stub nvim 'pwd -P >/dev/null'
+    stub ya 'exit 0'
+    caller="$fixture/caller"
+    mkdir -p "$caller"
+
+    (
+        cd "$caller"
+        rmdir "$caller"
+        run_bootstrap --skip-gui-setup >/dev/null
+    )
+
+    rm -rf "$fixture"
+}
+
 test_rejects_unknown_arguments
 test_dry_run_prints_without_executing
 test_orders_prerequisites_manifests_and_syncs
 test_explicit_upgrade
 test_skip_gui_setup
 test_plugin_failure_is_visible
+test_recovers_from_deleted_caller_directory
 printf 'bootstrap tests passed\n'

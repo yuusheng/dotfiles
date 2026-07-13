@@ -24,6 +24,9 @@ repo_root=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 shared_brewfile="$repo_root/Brewfile"
 local_brewfile="$repo_root/Brewfile.local"
 
+# Keep path-sensitive setup commands independent from the caller's working directory.
+cd "$repo_root"
+
 fail() {
     printf 'bootstrap: %s\n' "$*" >&2
     exit 1
