@@ -10,7 +10,6 @@ zmodule prompt-pwd
 zmodule magicmace
 zmodule homebrew
 zmodule exa
-zmodule direnv
 zmodule zsh-users/zsh-completions
 zmodule zsh-users/zsh-autosuggestions
 zmodule zsh-users/zsh-history-substring-search

@@ -1,4 +1,4 @@
-set -gx EDITOR vim
+set -gx EDITOR nvim
 fish_add_path /opt/homebrew/bin/
 fish_add_path $HOME/.cargo/bin
 fish_add_path $HOME/.local/bin
@@ -14,8 +14,7 @@ end
 
 if status is-interactive
     starship init fish | source
-    fnm env --use-on-cd --shell fish | source
-    direnv hook fish | source
+    mise activate fish | source
     zoxide init fish | source
     fzf --fish | source
 

@@ -23,6 +23,7 @@ done
 repo_root=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 shared_brewfile="$repo_root/Brewfile"
 local_brewfile="$repo_root/Brewfile.local"
+mise_config="$repo_root/mise/mise.toml"
 
 # Keep path-sensitive setup commands independent from the caller's working directory.
 cd "$repo_root"
@@ -47,6 +48,7 @@ run() {
 }
 
 [[ -f "$shared_brewfile" ]] || fail "missing $shared_brewfile"
+[[ -f "$mise_config" ]] || fail "missing $mise_config"
 
 if ! command -v brew >/dev/null 2>&1; then
     if [[ "$dry_run" == true ]]; then
@@ -68,22 +70,6 @@ else
     brew_bin=$(command -v brew)
 fi
 
-# Brew Bundle evaluates cargo entries, so Rust must exist before the manifest runs.
-if ! command -v cargo >/dev/null 2>&1; then
-    if [[ "$dry_run" == true ]]; then
-        printf '%s\n' "Would install Rust: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y"
-        print_command "$HOME/.cargo/bin/cargo" --version
-    else
-        printf '%s\n' 'Installing Rust...'
-        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-        [[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
-        command -v cargo >/dev/null 2>&1 || fail "Rust installation completed but cargo was not found"
-        cargo --version
-    fi
-else
-    run cargo --version
-fi
-
 bundle_mode=--no-upgrade
 [[ $upgrade == true ]] && bundle_mode=--upgrade
 
@@ -93,9 +79,19 @@ if [[ -f "$local_brewfile" ]]; then
 fi
 
 if [[ "$dry_run" == false ]]; then
+    command -v uv >/dev/null 2>&1 || fail "uv is unavailable after brew bundle"
+    command -v mise >/dev/null 2>&1 || fail "mise is unavailable after brew bundle"
     command -v nvim >/dev/null 2>&1 || fail "nvim is unavailable after brew bundle"
     command -v ya >/dev/null 2>&1 || fail "ya is unavailable after brew bundle"
+    uv_bin=$(command -v uv)
+    mise_bin=$(command -v mise)
+else
+    uv_bin=uv
+    mise_bin=mise
 fi
+
+run "$uv_bin" python install 3.11
+run env MISE_GLOBAL_CONFIG_FILE="$mise_config" "$mise_bin" install --yes
 run nvim --headless '+Lazy! sync' +qa
 run ya pkg install
 

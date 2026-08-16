@@ -32,6 +32,7 @@
 !scripts/**
 !tests/
 !tests/**
+!AGENTS.md
 .DS_Store
 *.local
 local.*
@@ -39,3 +40,5 @@ tmux/plugins/*
 !tmux
 !tmux/*
 !tmux/tmux.conf.local
+!mise
+!mise/*

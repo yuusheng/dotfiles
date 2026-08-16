@@ -33,12 +33,7 @@ alias grs="git remote set-url origin $1"
 
 source ~/.bash_profile
 
-# bun completions
-[ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+eval "$(mise activate zsh)"
 
 # nginx alias
 alias ngsr="nginx -s reload"
@@ -104,4 +99,3 @@ function y() {
 
 alias vim="nvim"
 alias vi="nvim"
-
