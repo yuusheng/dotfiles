@@ -1,18 +1,3 @@
-local plenary_path = require("plenary.path")
-
----@parma node_id string
-local function get_path(node_id)
-  ---@type Path
-  local path = plenary_path:new(node_id)
-  assert(type(path) == "table", "Path is not a table")
-
-  if path:is_dir() then
-    return path
-  else
-    return path:parent()
-  end
-end
-
 return {
   -- Hihglight colors
   {
@@ -28,7 +13,7 @@ return {
     cmd = "GrugFar",
     keys = {
       {
-        "<leader>sA",
+        "<leader>sp",
         function()
           local grug = require("grug-far")
           grug.open({
@@ -97,48 +82,7 @@ return {
       },
     },
   },
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    enabled = false,
-    opts = {
-      filesystem = {
-        filtered_items = {
-          always_show = {
-            ".gitignore",
-            ".github",
-            ".nuxt",
-            ".vscode",
-            ".npmrc",
-          },
-          always_show_by_pattern = {
-            ".env*",
-            ".*rc",
-          },
-          never_show = {
-            ".DS_Store",
-          },
-        },
-        commands = {
-          telescope_grep = function(state)
-            local cwd = vim.uv.cwd()
-            local path = get_path(state.tree:get_node():get_id())
-            local last_directory = path:make_relative(cwd)
-
-            require("telescope").extensions.live_grep_args.live_grep_args({
-              search = "",
-              cwd = last_directory,
-              prompt_title = "Live Grep in " .. last_directory,
-            })
-          end,
-        },
-        window = {
-          mappings = {
-            ["<D-f>"] = "telescope_grep",
-          },
-        },
-      },
-    },
-  },
+  { "nvim-neo-tree/neo-tree.nvim", enabled = false },
   {
     "stevearc/oil.nvim",
     keys = {
@@ -202,13 +146,25 @@ return {
           },
           ["<leader>ff"] = {
             function()
-              require("telescope.builtin").find_files({
-                cwd = require("oil").get_current_dir(),
-              })
+              local dir = require("oil").get_current_dir()
+              if dir then
+                require("fff").find_files_in_dir(dir)
+              end
             end,
             mode = "n",
             nowait = true,
             desc = "Find files in the current directory",
+          },
+          ["<D-f>"] = {
+            function()
+              local dir = require("oil").get_current_dir()
+              if dir then
+                require("fff").live_grep({ cwd = dir, title = "Grep in " .. vim.fn.fnamemodify(dir, ":~") })
+              end
+            end,
+            mode = "n",
+            nowait = true,
+            desc = "Grep in the current directory",
           },
         },
         win_options = {
@@ -259,8 +215,10 @@ return {
     "Bekaboo/dropbar.nvim",
     -- optional, but required for fuzzy finder support
     dependencies = {
-      "nvim-telescope/telescope-fzf-native.nvim",
-      build = "make",
+      {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build = "make",
+      },
     },
     config = function()
       local dropbar_api = require("dropbar.api")
@@ -327,53 +285,11 @@ return {
     },
   },
   {
-    "dmtrKovalenko/fff.nvim",
-    build = function()
-      -- downloads a prebuilt binary or falls back to cargo build
-      require("fff.download").download_or_build_binary()
-    end,
-    opts = {
-      debug = {
-        enabled = true,
-        show_scores = true,
-      },
-    },
-    lazy = false, -- the plugin lazy-initialises itself
-    keys = {
-      {
-        "ff",
-        function()
-          require("fff").find_files()
-        end,
-        desc = "FFFind files",
-      },
-      {
-        "fg",
-        function()
-          require("fff").live_grep()
-        end,
-        desc = "LiFFFe grep",
-      },
-      {
-        "fz",
-        function()
-          require("fff").live_grep({ grep = { modes = { "fuzzy", "plain" } } })
-        end,
-        desc = "Live fffuzy grep",
-      },
-      {
-        "fc",
-        function()
-          require("fff").live_grep({ query = vim.fn.expand("<cword>") })
-        end,
-        desc = "Search current word",
-      },
-    },
-  },
-  {
     "kawre/leetcode.nvim",
+    cmd = "Leet",
     opts = {
       lang = "cpp",
+      picker = { provider = "snacks-picker" },
       cn = {
         enabled = true, ---@type boolean
         translator = true, ---@type boolean
@@ -415,47 +331,6 @@ return {
             end
           end,
         },
-      },
-    },
-  },
-  {
-    "dmtrKovalenko/fff.nvim",
-    build = function()
-      require("fff.download").download_or_build_binary()
-    end,
-    lazy = false,
-    keys = {
-      {
-        "ff", -- try it if you didn't it is a banger keybinding for a picker
-        function()
-          require("fff").find_files()
-        end,
-        desc = "FFFind files",
-      },
-      {
-        "fg",
-        function()
-          require("fff").live_grep()
-        end,
-        desc = "LiFFFe grep",
-      },
-      {
-        "fz",
-        function()
-          require("fff").live_grep({
-            grep = {
-              modes = { "fuzzy", "plain" },
-            },
-          })
-        end,
-        desc = "Live fffuzy grep",
-      },
-      {
-        "fc",
-        function()
-          require("fff").live_grep({ query = vim.fn.expand("<cword>") })
-        end,
-        desc = "Search current word",
       },
     },
   },

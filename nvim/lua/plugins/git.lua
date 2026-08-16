@@ -6,6 +6,12 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
+    opts = {
+      integrations = {
+        telescope = false,
+        snacks = true,
+      },
+    },
     config = true,
     keys = {
       {

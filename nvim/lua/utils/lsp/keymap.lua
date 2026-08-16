@@ -32,11 +32,11 @@ function M.get()
         desc = "Next Reference", cond = function() return Snacks.words.is_enabled() end },
       { "<a-p>", function() Snacks.words.jump(-vim.v.count1, true) end, has = "documentHighlight",
         desc = "Prev Reference", cond = function() return Snacks.words.is_enabled() end },
-      -- Telescope LSP integration
-      { "gd", function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end, desc = "Goto Definition", has = "definition" },
-      { "gr", "<cmd>Telescope lsp_references<cr>", desc = "References", nowait = true },
-      { "gI", function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end, desc = "Goto Implementation" },
-      { "gy", function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end, desc = "Goto T[y]pe Definition" },
+      -- Snacks Picker LSP integration
+      { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition", has = "definition" },
+      { "gr", function() Snacks.picker.lsp_references() end, desc = "References", nowait = true },
+      { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
+      { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
     }
 
   return M._keys

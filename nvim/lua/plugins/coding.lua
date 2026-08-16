@@ -3,6 +3,7 @@ return {
   {
     "gbprod/yanky.nvim",
     desc = "Better Yank/Paste",
+    dependencies = { "folke/snacks.nvim" },
     event = "LazyFile",
     opts = {
       highlight = { timer = 150 },
@@ -11,11 +12,7 @@ return {
       {
         "<leader>yh",
         function()
-          if LazyVim.pick.picker.name == "telescope" then
-            require("telescope").extensions.yank_history.yank_history({})
-          else
-            vim.cmd([[YankyRingHistory]])
-          end
+          Snacks.picker.yanky()
         end,
         mode = { "n", "x" },
         desc = "Open Yank History",
