@@ -7,7 +7,7 @@ return {
     build = function()
       require("fff.download").download_or_build_binary()
     end,
-    lazy = false,
+    lazy = true,
     init = function()
       picker_theme.setup()
     end,

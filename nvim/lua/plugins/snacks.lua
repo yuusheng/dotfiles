@@ -24,6 +24,21 @@ return {
       },
     },
     opts = function(_, opts)
+      opts.dashboard = opts.dashboard or {}
+      opts.dashboard.preset = opts.dashboard.preset or {}
+      opts.dashboard.preset.pick = function(cmd, pick_opts)
+        local fff = require("utils.fff")
+        local cwd = pick_opts and pick_opts.cwd or nil
+
+        if cmd == "files" then
+          return fff.find_files(cwd)
+        elseif cmd == "live_grep" then
+          return fff.live_grep(cwd)
+        end
+
+        return LazyVim.pick(cmd, pick_opts)()
+      end
+
       opts.picker = opts.picker or {}
       opts.picker.layout = { preset = "telescope_catppuccin" }
       opts.picker.layouts = opts.picker.layouts or {}

@@ -1,6 +1,7 @@
 local lsp_util = require("utils.lsp")
 
 lsp_util.apply_ui_tweaks()
+lsp_util.setup_commands()
 lsp_util.on_attach(lsp_util.on_attach_default)
 lsp_util.on_attach(require("utils.lsp.keymap").on_attach)
 
@@ -51,7 +52,7 @@ return {
   },
   {
     "mason-org/mason.nvim",
-    event = { "BufReadPost", "BufNewFile", "VimEnter" },
+    event = "VeryLazy",
   },
   { "mason-org/mason-lspconfig.nvim", config = function() end },
   {

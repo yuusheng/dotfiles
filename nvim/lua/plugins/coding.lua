@@ -4,7 +4,6 @@ return {
     "gbprod/yanky.nvim",
     desc = "Better Yank/Paste",
     dependencies = { "folke/snacks.nvim" },
-    event = "LazyFile",
     opts = {
       highlight = { timer = 150 },
     },
@@ -34,6 +33,12 @@ return {
       { "=p", "<Plug>(YankyPutAfterFilter)", desc = "Put After Applying a Filter" },
       { "=P", "<Plug>(YankyPutBeforeFilter)", desc = "Put Before Applying a Filter" },
     },
+  },
+  {
+    "mfussenegger/nvim-lint",
+    event = function()
+      return { "BufWritePost", "InsertLeave" }
+    end,
   },
   {
     "folke/which-key.nvim",

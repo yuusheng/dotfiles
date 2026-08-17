@@ -28,30 +28,20 @@ function M.on_attach(callback)
   })
 end
 
-function M.on_attach_default(client)
+function M.on_attach_default(client, bufnr)
   -- if current nvim version supports inlay hints, enable them
   if vim.lsp["inlay_hint"] ~= nil and client.supports_method(Methods.textDocument_inlayHint) then
-    vim.lsp.inlay_hint.enable(true)
+    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
   end
+end
 
+function M.setup_commands()
   vim.api.nvim_create_user_command("LspRestart", function(info)
     M.lsp_restart(info)
   end, {
     nargs = "*",
     complete = complete_clients,
     desc = "Restart one or more LSP clients (all if none specified)",
-  })
-
-  vim.api.nvim_create_user_command("LspLog", function()
-    vim.cmd(string.format("tabnew %s", vim.lsp.log.get_filename()))
-  end, {
-    desc = "Opens the Nvim LSP client log.",
-  })
-
-  vim.api.nvim_create_user_command("LspInfo", function()
-    vim.cmd(string.format("tabnew %s", vim.lsp.log.get_filename()))
-  end, {
-    desc = "Opens the Nvim LSP client log.",
   })
 
   vim.api.nvim_create_user_command("LspInfo", ":checkhealth vim.lsp", { desc = "Alias to `:checkhealth vim.lsp`" })
