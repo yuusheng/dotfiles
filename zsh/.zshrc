@@ -39,9 +39,6 @@ eval "$(mise activate zsh)"
 alias ngsr="nginx -s reload"
 alias ngss="nginx -s stop"
 
-# go alias
-alias air='$(go env GOPATH)/bin/air'
-
 # cd alias
 alias cop="cd ~/open\ source"
 alias cpp="cd ~/project"

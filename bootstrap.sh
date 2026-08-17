@@ -23,7 +23,7 @@ done
 repo_root=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 shared_brewfile="$repo_root/Brewfile"
 local_brewfile="$repo_root/Brewfile.local"
-mise_config="$repo_root/mise/mise.toml"
+mise_config="$repo_root/mise/config.toml"
 
 # Keep path-sensitive setup commands independent from the caller's working directory.
 cd "$repo_root"
@@ -91,7 +91,7 @@ else
 fi
 
 run "$uv_bin" python install 3.11
-run env MISE_GLOBAL_CONFIG_FILE="$mise_config" "$mise_bin" install --yes
+run "$mise_bin" install --yes
 run nvim --headless '+Lazy! sync' +qa
 run ya pkg install
 

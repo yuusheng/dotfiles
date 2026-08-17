@@ -10,7 +10,7 @@ Do not use Homebrew to install Node.js, pnpm, Go, Bun, Deno, Rust, Python, or th
 
 ## mise: development toolchains
 
-Use `mise/mise.toml` for global default versions of Node.js, pnpm, Go, Bun, Deno, and Rust, plus genuinely global development CLIs. Put exact project-specific versions, environment variables, and tasks in that project's `mise.toml` instead of adding more global defaults.
+Use `mise/config.toml`, mise's default global config path under `~/.config`, for global default versions of Node.js, pnpm, Go, Bun, Deno, and Rust, plus genuinely global development CLIs. Put exact project-specific versions, environment variables, and tasks in that project's `mise.toml` instead of adding more global defaults.
 
 Rust is declared through mise but is installed through rustup underneath. Do not add a Homebrew Rust formula. The globally listed Go and Cargo tools are retained for editor support and compatibility; prefer moving a tool into a project's `mise.toml` when only that project needs it.
 

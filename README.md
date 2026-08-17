@@ -77,6 +77,9 @@ $EDITOR Brewfile.local
 subscriptions, `.env` files, application databases, and device identifiers
 must also remain untracked.
 
+Global development toolchains and CLIs live in `mise/config.toml`, mise's
+default global configuration path under `~/.config`.
+
 ## Daily synchronization
 
 Pull configuration changes without creating an implicit merge, apply them,
