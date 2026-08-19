@@ -1,5 +1,4 @@
 return {
-  -- Hihglight colors
   {
     "rhysd/accelerated-jk",
     event = "VeryLazy",
@@ -13,7 +12,7 @@ return {
     cmd = "GrugFar",
     keys = {
       {
-        "<leader>sp",
+        "<leader>sA",
         function()
           local grug = require("grug-far")
           grug.open({
@@ -24,12 +23,6 @@ return {
         desc = "Search and Replace using ast-grep",
       },
     },
-  },
-  {
-    "ThePrimeagen/refactoring.nvim",
-    event = function()
-      return {}
-    end,
   },
   {
     "chrisgrieser/nvim-spider",
@@ -88,15 +81,62 @@ return {
     },
   },
   {
-    "windwp/nvim-autopairs",
-    event = "InsertEnter",
+    "kevinhwang91/nvim-ufo",
+    event = "BufReadPost",
+    dependencies = { "kevinhwang91/promise-async" },
     opts = {
-      enable_check_bracket_line = true,
+      provider_selector = function()
+        return { "lsp", "indent" }
+      end,
+      fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
+        vim.api.nvim_set_hl(0, "UfoFoldSuffix", { fg = "#AE9F86" })
+        local newVirtText = {}
+        local suffix = (" 󰁂 %d "):format(endLnum - lnum)
+        local sufWidth = vim.fn.strdisplaywidth(suffix)
+        local targetWidth = width - sufWidth
+        local curWidth = 0
+        for _, chunk in ipairs(virtText) do
+          local chunkText = chunk[1]
+          local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+          if targetWidth > curWidth + chunkWidth then
+            table.insert(newVirtText, chunk)
+          else
+            chunkText = truncate(chunkText, targetWidth - curWidth)
+            local hlGroup = chunk[2]
+            table.insert(newVirtText, { chunkText, hlGroup })
+            chunkWidth = vim.fn.strdisplaywidth(chunkText)
+            if curWidth + chunkWidth < targetWidth then
+              suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
+            end
+            break
+          end
+          curWidth = curWidth + chunkWidth
+        end
+        table.insert(newVirtText, { suffix, "UfoFoldSuffix" })
+        return newVirtText
+      end,
+    },
+    keys = {
+      {
+        "zR",
+        function()
+          require("ufo").openAllFolds()
+        end,
+        desc = "Open all folds",
+      },
+      {
+        "zM",
+        function()
+          require("ufo").closeAllFolds()
+        end,
+        desc = "Close all folds",
+      },
     },
   },
   {
     "rmagatti/goto-preview",
     dependencies = { "rmagatti/logger.nvim" },
+    event = "LazyFile",
     opts = {
       post_open_hook = function(bufnr)
         vim.bo[bufnr].buflisted = false
@@ -134,6 +174,10 @@ return {
       },
     },
     lazy = true,
+    dependencies = {
+      "refractalize/oil-git-status.nvim",
+      "JezerM/oil-lsp-diagnostics.nvim",
+    },
     config = function()
       function _G.get_oil_winbar()
         local dir = require("oil").get_current_dir()
@@ -184,7 +228,7 @@ return {
               end
             end,
           },
-          ["<leader>ff"] = {
+          ["<C-f>"] = {
             function()
               local dir = require("oil").get_current_dir()
               if dir then
@@ -195,7 +239,7 @@ return {
             nowait = true,
             desc = "Find files in the current directory",
           },
-          ["<D-f>"] = {
+          ["<C-g>"] = {
             function()
               local dir = require("oil").get_current_dir()
               if dir then
@@ -208,9 +252,13 @@ return {
           },
         },
         win_options = {
+          signcolumn = "yes:2",
           winbar = "%!v:lua.get_oil_winbar()",
         },
       })
+
+      require("oil-git-status").setup({})
+      require("oil-lsp-diagnostics").setup()
     end,
   },
   {
@@ -253,19 +301,7 @@ return {
 
   {
     "Bekaboo/dropbar.nvim",
-    -- optional, but required for fuzzy finder support
-    dependencies = {
-      {
-        "nvim-telescope/telescope-fzf-native.nvim",
-        build = "make",
-      },
-    },
-    config = function()
-      local dropbar_api = require("dropbar.api")
-      vim.keymap.set("n", "<Leader>;", dropbar_api.pick, { desc = "Pick symbols in winbar" })
-      vim.keymap.set("n", "[;", dropbar_api.goto_context_start, { desc = "Go to start of current context" })
-      vim.keymap.set("n", "];", dropbar_api.select_next_context, { desc = "Select next context" })
-    end,
+    opts = {},
   },
   {
     "mluders/comfy-line-numbers.nvim",
@@ -321,56 +357,6 @@ return {
     opts = {
       formatters_by_ft = {
         rust = { "rustfmt", lsp_format = "fallback" },
-      },
-    },
-  },
-  {
-    "kawre/leetcode.nvim",
-    cmd = "Leet",
-    opts = {
-      lang = "cpp",
-      picker = { provider = "snacks-picker" },
-      cn = {
-        enabled = true, ---@type boolean
-        translator = true, ---@type boolean
-        translate_problems = true, ---@type boolean
-      },
-      injector = {
-        ["rust"] = {
-          before = { "#[allow(dead_code)]", "fn main(){}", "#[allow(dead_code)]", "struct Solution;" },
-        },
-      },
-      hooks = {
-        ["question_enter"] = {
-          function(question)
-            if question.lang ~= "rust" then
-              return
-            end
-            local problem_dir = vim.fn.stdpath("data") .. "/leetcode/Cargo.toml"
-            local content = [[
-              [package]
-              name = "leetcode"
-              edition = "2024"
-
-              [lib]
-              name = "%s"
-              path = "%s"
-
-              [dependencies]
-              rand = "0.10"
-              regex = "1"
-              itertools = "0.14.0"
-            ]]
-            local file = io.open(problem_dir, "w")
-            if file then
-              local formatted = (content:gsub(" +", "")):format(question.q.frontend_id, question:path())
-              file:write(formatted)
-              file:close()
-            else
-              print("Failed to open file: " .. problem_dir)
-            end
-          end,
-        },
       },
     },
   },

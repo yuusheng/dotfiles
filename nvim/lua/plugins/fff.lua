@@ -13,6 +13,11 @@ return {
     end,
     opts = {
       lazy_sync = true,
+      prompt_vim_mode = true,
+      keymaps = {
+        focus_list = "<A-w>",
+        focus_preview = "<A-w>",
+      },
       layout = {
         prompt_position = "top",
       },
@@ -57,62 +62,62 @@ return {
       {
         "<leader><space>",
         function()
-          fff.find_files(fff.root())
+          fff.find_files(fff.cwd())
         end,
-        desc = "FFF Find Files (Root)",
+        desc = "FFF Find Files (cwd)",
       },
       {
         "<leader>ff",
-        function()
-          fff.find_files(fff.root())
-        end,
-        desc = "FFF Find Files (Root)",
-      },
-      {
-        "<leader>fF",
         function()
           fff.find_files(fff.cwd())
         end,
         desc = "FFF Find Files (cwd)",
       },
+      {
+        "<leader>fF",
+        function()
+          fff.find_files(fff.root())
+        end,
+        desc = "FFF Find Files (Root)",
+      },
       { "<leader>fd", fff.find_in_directory, desc = "FFF Find Files in Directory" },
       {
         "<leader>/",
-        function()
-          fff.live_grep(fff.root())
-        end,
-        desc = "FFF Grep (Root)",
-      },
-      {
-        "<leader>sg",
-        function()
-          fff.live_grep(fff.root())
-        end,
-        desc = "FFF Grep (Root)",
-      },
-      {
-        "<leader>sG",
         function()
           fff.live_grep(fff.cwd())
         end,
         desc = "FFF Grep (cwd)",
       },
+      {
+        "<leader>sg",
+        function()
+          fff.live_grep(fff.cwd())
+        end,
+        desc = "FFF Grep (cwd)",
+      },
+      {
+        "<leader>sG",
+        function()
+          fff.live_grep(fff.root())
+        end,
+        desc = "FFF Grep (Root)",
+      },
       { "<leader>sF", fff.grep_in_directory, desc = "FFF Grep in Directory" },
       {
         "<leader>sw",
-        function()
-          fff.grep_under_cursor(fff.root())
-        end,
-        mode = { "n", "x" },
-        desc = "FFF Search Word/Selection (Root)",
-      },
-      {
-        "<leader>sW",
         function()
           fff.grep_under_cursor(fff.cwd())
         end,
         mode = { "n", "x" },
         desc = "FFF Search Word/Selection (cwd)",
+      },
+      {
+        "<leader>sW",
+        function()
+          fff.grep_under_cursor(fff.root())
+        end,
+        mode = { "n", "x" },
+        desc = "FFF Search Word/Selection (Root)",
       },
       {
         "<leader>sR",

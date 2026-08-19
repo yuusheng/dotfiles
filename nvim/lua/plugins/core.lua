@@ -1,6 +1,13 @@
 return {
   { "folke/lazy.nvim", version = false },
   {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    opts = {
+      auto_integrations = false,
+    },
+  },
+  {
     "LazyVim/LazyVim",
     version = false,
     opts = {

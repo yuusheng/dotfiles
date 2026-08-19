@@ -68,6 +68,24 @@ return {
         "<Cmd>DiffviewOpen<CR>",
         desc = "open diffview",
       },
+      {
+        "<leader>gD",
+        function()
+          Snacks.picker.git_branches({
+            all = true,
+            confirm = function(picker, item)
+              picker:close()
+              if item and item.branch then
+                require("diffview").open({
+                  item.branch .. "...HEAD",
+                  "--imply-local",
+                })
+              end
+            end,
+          })
+        end,
+        desc = "Diff Against Branch",
+      },
     },
   },
   { "akinsho/git-conflict.nvim", version = "*", config = true },
